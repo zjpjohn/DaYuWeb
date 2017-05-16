@@ -1,22 +1,22 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div>
+    <v-header></v-header>
   </div>
 </template>
 
 <script>
+import Header  from './pages/header'
 export default {
   name: 'index',
   data () {
     return {
-      msg: 'This is the first page of Home'
     }
+  },components:{
+   'v-header': Header
   }
 }
 </script>
 
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+
 </style>
