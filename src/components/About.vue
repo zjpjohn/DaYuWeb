@@ -1,20 +1,21 @@
 <template>
-  <h1>{{msg}}</h1>
+    <div>
+        <h2>关于页面</h2>
+    </div>
 </template>
 
 <script>
 export default {
-    name:'about',
-    data (){
+    name: 'about',
+    data() {
         return {
-            msg:'This is the first page of about'
         }
     }
 }
 </script>
 
 <style>
-h1{
+h1 {
     text-align: center
 }
 </style>

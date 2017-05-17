@@ -1,14 +1,18 @@
 <template>
   <div>
-    <h1>首页</h1>
+    <v-subnav></v-subnav>
+    BOOK
   </div>
 </template>
 
 <script>
+import Subnav from '@/components/public/Subnav'
 export default {
   data() {
     return {
     }
+  }, components: {
+    'v-subnav': Subnav
   }
 }
 </script>
