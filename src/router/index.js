@@ -10,7 +10,6 @@ import About from '@/components/About'
 import Login from '@/components/Login'
 import Goods from '@/components/Goods'
 import Answer from '@/components/Answer'
-import Book from '@/components/Book'
 Vue.use(Router)
 
 export default new Router({
@@ -49,9 +48,7 @@ export default new Router({
     { /**登录页面**/
       path: '/login',
       components: {
-        header: Header,
-        content: Login,
-        footer: Footer
+        content: Login
       }
     }
   ]

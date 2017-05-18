@@ -2,7 +2,7 @@
     <div class="container-fluid subnav">
         <div class="container">
             <ul>
-                 <router-link tag="li" :to="{path:'/goods/'+item.type}" active-class="subnav-active" v-for="item in subnavlist">
+                 <router-link tag="li" :to="{path:'/goods/'+item.type}" active-class="subnav-active" v-for="item in subnavlist" :key="item.id">
                     <a>{{item.name}}</a>
                     <span class="subnav-tag">{{item.count}}</span>
                 </router-link>

@@ -38,4 +38,5 @@ export default {
 @import './assets/css/base.css';
 @import './assets/css/bootstrap-grid.min.css';
 @import './assets/css/fontello.css'
+
 </style>

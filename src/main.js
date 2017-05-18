@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import VueProgressBar from 'vue-progressbar'
 import VueResource from 'vue-resource'
+import VeeValidate from 'vee-validate'
 Vue.config.productionTip = false
 
 /**进度条配置信息**/
@@ -16,8 +17,9 @@ const options = {
   location: 'top',
   inverse: false
 }
-Vue.use(VueResource)
-Vue.use(VueProgressBar, options)
+Vue.use(VueResource)//使用路由
+Vue.use(VeeValidate)//使用表单验证插件
+Vue.use(VueProgressBar, options)//使用进度条插件
 new Vue({
   el: '#app',
   router,

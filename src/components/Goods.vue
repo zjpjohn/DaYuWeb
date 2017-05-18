@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-subnav :subnavlist="subnavlist"></v-subnav>
-    <router-view></router-view>
     <h2>当前页面是{{msg}}</h2>
   </div>
 </template>
@@ -15,7 +14,7 @@ export default {
       subnavlist: []
     }
   }, components: {
-    'v-subnav': Subnav
+    'v-subnav': Subnav,
   }, created() {
     this.msg = this.$route.params.type
   }, watch: {//监听参数变化
@@ -23,10 +22,9 @@ export default {
       this.msg = newval
     }
   }, mounted() {
+    //渲染之前之前获取数据给子组件
     this.$http.get('../../static/subnav-data.json').then(function (response) {
-      console.log(response.body)
       this.subnavlist = response.body.subnavlist;
-      console.log(this.subnavlist)
     }, function (response) {
       alert('Error')
     })
