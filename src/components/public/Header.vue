@@ -9,10 +9,13 @@
                     <router-link :to="{ path: '/' }">首页</router-link>
                 </li>
                 <li class="pull-left">
-                    <router-link :to="{path:'/goods/all'}">物品</router-link>
+                    <router-link :to="{path:'/goods/all'}">闲置</router-link>
                 </li>
                 <li class="pull-left">
-                    <router-link :to="{path:'/answer'}">问题</router-link>
+                    <router-link :to="{path:'/goods/all'}">求购</router-link>
+                </li>
+                <li class="pull-left">
+                    <router-link :to="{path:'/answer'}">提问</router-link>
                 </li>
                 <li class="pull-left">
                     <a href="#">实验室</a>
@@ -46,10 +49,12 @@ export default {
 .header ul li {
     padding: 0 12px;
     line-height: 80px;
+    font-size: 16px
 }
 
 .header ul li a {
-    color: #333333
+    color: #333333;
+    font-weight: 500;
 }
 
 .header ul li a:hover {

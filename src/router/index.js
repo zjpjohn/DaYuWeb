@@ -3,7 +3,6 @@ import Router from 'vue-router'
 /**共有组件***/
 import Header from '@/components/public/Header'
 import Footer from '@/components/public/Footer'
-import List from '@/components/public/List'
 /**私有组件***/
 import Index from '@/components/Index'
 import About from '@/components/About'

@@ -1,13 +1,17 @@
 <template>
     <div class="container">
         <h2 class="text-center">登录到大鱼互联</h2>
+        <div v-show="errors.has('Email')" class="errors">
+            {{ errors.first('Email') }}
+        </div>
+        <div v-show="errors.has('Password')" class="errors">
+            {{ errors.first('Password') }}
+        </div>
         <div class="login">
-            <form>
-                 <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
-                <label for="email" >Email</label>
+            <form @submit.prevent="validateBeforeSubmit">
+                <label for="email">Email</label>
                 <br/>
-                <input type="text" id="email" v-validate="'required|email'" name="email"/>
-               
+                <input type="text" v-validate="'required|email'" name="Email" v-model="email" />
                 <br/>
                 <br/>
                 <label for="pwd">密码</label>
@@ -15,9 +19,9 @@
                     <a href="#">忘记密码?</a>
                 </span>
                 <br/>
-                <input type="password" id="pwd" />
+                <input type="password" v-validate="{ rules: { required: true, min: 8 } }" name="Password" v-model="password" />
                 <br/>
-                <button type="submit">登录</button>
+                <button type="submit">{{btnMsg}}</button>
             </form>
         </div>
     
@@ -39,11 +43,21 @@
     </div>
 </template>
 <script>
+import { Validator } from 'vee-validate';
 export default {
     name: 'login',
     data() {
         return {
-
+            email: '',
+            password: '',
+            btnMsg: '登录'
+        }
+    }, methods: {
+        validateBeforeSubmit: function () {
+            this.$validator.validateAll().then(() => {
+                alert(this.email + '&' + this.password);
+                this.btnMsg = '登录中...';
+            })
         }
     }
 }
@@ -55,6 +69,19 @@ h2 {
 
 .text-center {
     text-align: center
+}
+
+.errors {
+    border: 1px solid #DDC0C4;
+    background: #FFDCE0;
+    color: #B9591D;
+    border-radius: 4px;
+    margin: auto;
+    width: 30%;
+    padding: 12px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px
 }
 
 .login,

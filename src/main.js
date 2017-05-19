@@ -5,7 +5,12 @@ import App from './App'
 import router from './router'
 import VueProgressBar from 'vue-progressbar'
 import VueResource from 'vue-resource'
-import VeeValidate from 'vee-validate'
+
+import VeeValidate, {
+  Validator
+} from 'vee-validate';
+import zh_CN from 'vee-validate/dist/locale/zh_CN';
+
 Vue.config.productionTip = false
 
 /**进度条配置信息**/
@@ -17,9 +22,30 @@ const options = {
   location: 'top',
   inverse: false
 }
-Vue.use(VueResource)//使用路由
-Vue.use(VeeValidate)//使用表单验证插件
-Vue.use(VueProgressBar, options)//使用进度条插件
+
+Validator.addLocale(zh_CN);
+//表单插件配置
+const config = {
+  errorBagName: 'errors', // change if property conflicts.
+  fieldsBagName: 'fields',
+  delay: 0,
+  locale: 'zh_CN',
+  dictionary: null,
+  strict: true,
+  enableAutoClasses: true,
+  classNames: {
+    touched: 'touched',
+    untouched: 'untouched',
+    valid: 'valid',
+    invalid: 'invalid',
+    pristine: 'pristine',
+    dirty: 'dirty'
+  }
+};
+Vue.use(VeeValidate, config); //使用表单验证插件
+
+Vue.use(VueResource) //使用路由
+Vue.use(VueProgressBar, options) //使用进度条插件
 new Vue({
   el: '#app',
   router,

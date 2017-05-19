@@ -1,5 +1,5 @@
 <template>
-  <div class="container clear">
+  <div class="container clear footer">
       <p>
           ©2017 大鱼互联
           <a href="#">团队</a>
@@ -17,5 +17,9 @@ export default {
 </script>
 
 <style>
-
+.footer{
+    padding-top: 20px;
+    border-top: 1px solid #EAECEF;
+    margin-top: 40px
+}
 </style>
