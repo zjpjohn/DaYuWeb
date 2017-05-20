@@ -34,6 +34,10 @@
               <a href="#">
                 <span class="pull-right">11</span>虚拟物品</a>
             </li>
+             <li>
+              <a href="#">
+                <span class="pull-right">310</span>其他</a>
+            </li>
           </ul>
         </div>
         <!--分页-->
@@ -57,7 +61,7 @@ export default {
   }, components: {
     'v-subnav': Subnav,
     'goods-list': GoodsList,
-    'v-pager':Pager
+    'v-pager': Pager
   }, created() {
     this.msg = this.$route.params.type
   }, watch: {//监听参数变化
@@ -85,13 +89,11 @@ export default {
   border-bottom: 1px solid #E1E4E8
 }
 
-.type-list {
-  border: 1px solid #E1E4E8;
-  margin-top: 20px;
+.type-list ul {
   padding: 20px;
-  width: 80%;
+  border: 1px solid #E1E4E8;
   border-radius: 4px;
-  height: 280px;
+  margin-top: 20px
 }
 
 .type-list li {

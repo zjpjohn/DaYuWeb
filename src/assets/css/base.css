@@ -2,7 +2,7 @@
  * @Author: xiaoshan 
  * @Date: 2017-05-16 18:23:41 
  * @Last Modified by: xiaoshan
- * @Last Modified time: 2017-05-18 10:07:33
+ * @Last Modified time: 2017-05-20 16:20:55
  */
 
 html,
@@ -43,6 +43,17 @@ a {
   clear: both
 }
 
+.btn {
+  padding: 8px 18px;
+  cursor: pointer;
+  border: 1px solid #C7CACD;
+  background: #F3F6F8;
+  color: #24292E;
+  border-radius: 3px;
+}
+.btn:hover{
+  background: #E9EEF3
+}
 .btn-success {
   border: 1px solid #279643;
   padding: 6px 18px;

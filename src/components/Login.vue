@@ -55,8 +55,10 @@ export default {
     }, methods: {
         validateBeforeSubmit: function () {
             this.$validator.validateAll().then(() => {
-                alert(this.email + '&' + this.password);
                 this.btnMsg = '登录中...';
+                setTimeout(function () {
+                    location.href = "/#/users"
+                }, 2000);
             })
         }
     }

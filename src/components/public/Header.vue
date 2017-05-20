@@ -18,7 +18,7 @@
                     <router-link :to="{path:'/answer'}">提问</router-link>
                 </li>
                 <li class="pull-left">
-                    <a href="#">实验室</a>
+                   <router-link :to="{path:'/users'}">去后台</router-link>
                 </li>
                 <li class="pull-right">
                     <a href="#">注册</a>
