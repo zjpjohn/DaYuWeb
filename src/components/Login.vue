@@ -1,27 +1,27 @@
 <template>
     <div class="container">
         <h2 class="text-center">登录到大鱼互联</h2>
-        <div v-show="errors.has('Email')" class="errors">
-            {{ errors.first('Email') }}
+        <div class="errors" v-show="hasError">
+            <span class="pull-right">
+                <i class=" icon-cancel" @click="hideError"></i>
+            </span>用户名或密码错误！
         </div>
-        <div v-show="errors.has('Password')" class="errors">
-            {{ errors.first('Password') }}
-        </div>
-        <div class="login">
+        <div class="auth-form-body">
             <form @submit.prevent="validateBeforeSubmit">
-                <label for="email">Email</label>
-                <br/>
-                <input type="text" v-validate="'required|email'" name="Email" v-model="email" />
-                <br/>
-                <br/>
-                <label for="pwd">密码</label>
-                <span class="pull-right">
-                    <a href="#">忘记密码?</a>
-                </span>
-                <br/>
-                <input type="password" v-validate="{ rules: { required: true, min: 8 } }" name="Password" v-model="password" />
-                <br/>
-                <button type="submit">{{btnMsg}}</button>
+                <div class="login-form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <br/>
+                    <input type="text" class="form-input" name="Email" v-model="email" placeholder="you@example.org" />
+                </div>
+                <div class="login-form-group">
+                    <label for="pwd" class="form-label">密码</label>
+                    <span class="pull-right forget-password">
+                        <a href="#">忘记密码?</a>
+                    </span>
+                    <br/>
+                    <input type="password" class="form-input" name="Password" v-model="password" placeholder="*********" />
+                </div>
+                <button type="submit" class="form-button">{{btnMsg}}</button>
             </form>
         </div>
     
@@ -48,18 +48,22 @@ export default {
     name: 'login',
     data() {
         return {
+            hasError: true,
             email: '',
             password: '',
             btnMsg: '登录'
         }
     }, methods: {
         validateBeforeSubmit: function () {
-            this.$validator.validateAll().then(() => {
+            if (this.email != '' && this.password != '') {
                 this.btnMsg = '登录中...';
-                setTimeout(function () {
-                    location.href = "/#/users"
-                }, 2000);
-            })
+                alert(this.email + '&' + this.password)
+                setTimeout(()=>{
+                    location.href='/#/user/overview'
+                }, 1000);
+            }
+        }, hideError: function () {
+            this.hasError = false
         }
     }
 }
@@ -79,59 +83,62 @@ h2 {
     color: #B9591D;
     border-radius: 4px;
     margin: auto;
-    width: 30%;
-    padding: 12px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px
+    width: 308px;
+    padding: 16px
 }
 
-.login,
+.auth-form-body,
 .create-account {
     border: 1px solid #D8DEE2;
     border-radius: 4px;
     margin: auto;
-    padding: 24px;
-    width: 30%;
-}
-
-.create-account {
-    padding: 0;
+    padding: 16px;
+    width: 308px;
     margin-top: 20px
 }
 
-.login label {
-    font-weight: 600;
-    line-height: 30px;
-    font-size: 18px
+.create-account {
+    padding: 0 20px;
 }
 
-.login input {
+.login-form-group {
+    margin-top: 24px;
+}
+
+.form-label {
+    font-weight: 500;
+    line-height: 30px;
+    font-size: 18px;
+    display: inline-block
+}
+
+.form-input {
     width: 100%;
-    height: 34px;
+    height: 32px;
     border-radius: 4px;
     outline: none;
     border: 1px solid #D1D5DA;
     text-indent: 10px
 }
 
-.login input:focus {
+.form-input:focus {
     border: 1px solid #2188FF;
     box-shadow: 0 0 6px #2188FF
 }
 
-.login button {
+.form-button {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     height: 36px;
-    border: 1px solid #0358B7;
+    border: 1px solid #299A45;
     border-radius: 4px;
-    background: #0366D6;
-    color: #FFFFFF
+    background: #34d058;
+    color: #FFFFFF;
+    cursor: poiter
 }
 
-.login button:hover {
-    background: #0558B4;
+.form-button:hover {
+    background: #28a745;
     cursor: pointer
 }
 

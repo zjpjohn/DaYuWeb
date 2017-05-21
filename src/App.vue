@@ -36,7 +36,5 @@ export default {
 
 <style>
 @import './assets/css/base.css';
-@import './assets/css/bootstrap-grid.min.css';
-@import './assets/css/fonts.css'
-
+@import './assets/css/fonts.css';
 </style>

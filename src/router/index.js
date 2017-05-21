@@ -1,18 +1,32 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 /**共有组件***/
-import Header from '@/components/public/Header'
+import siteHeader from '@/components/public/site-header'
 import Footer from '@/components/public/Footer'
-import HeaderLogin from '@/components/public/header-login'
+import loginHeader from '@/components/public/login-header'
+
 /**私有组件***/
 import Index from '@/components/Index'
 import About from '@/components/About'
 import Login from '@/components/Login'
 import Goods from '@/components/Goods'
 import Answer from '@/components/Answer'
-import Users from '@/components/Users'
 
-import Start from '@/components/Start'
+
+/**个人中心组件***/
+import user from '@/components/users/user'
+import stars from '@/components/users/stars'
+import followers from '@/components/users/followers'
+import publish from '@/components/users/publish'
+import following from '@/components/users/following'
+import overview from '@/components/users/overview'
+
+
+/***设置**/
+import settings from '@/components/settings/settings'
+import profile from '@/components/settings/profile'
+import account from '@/components/settings/account'
+import emails from '@/components/settings/emails'
 Vue.use(Router)
 
 export default new Router({
@@ -20,7 +34,7 @@ export default new Router({
       path: '/',
       name: 'index',
       components: {
-        header: Header,
+        header: siteHeader,
         content: Index,
         footer: Footer
       }
@@ -28,14 +42,14 @@ export default new Router({
       path: '/goods/:type',
       name: 'goods',
       components: {
-        header: Header,
+        header: siteHeader,
         content: Goods,
         footer: Footer
       }
     }, { /**问答页面**/
       path: '/answer',
       components: {
-        header: Header,
+        header: siteHeader,
         content: Answer,
         footer: Footer
       }
@@ -43,7 +57,7 @@ export default new Router({
     { /**关于页面**/
       path: '/about',
       components: {
-        header: Header,
+        header: siteHeader,
         content: About,
         footer: Footer
       }
@@ -55,22 +69,64 @@ export default new Router({
       }
     },
     { /***用户中心****/
-      path: '/users',
+      path: '/user',
       components: {
-        header: HeaderLogin,
-        content: Users,
+        header: loginHeader,
+        content: user,
         footer: Footer
       },
       children: [{
+          path: 'overview',
+          components: {
+            user: overview
+          }
+        }, {
           path: 'start',
           components: {
-            users: Start
+            user: stars
           }
         },
         {
           path: 'followers',
           components: {
-            users: Login
+            user: followers
+          }
+        },
+        {
+          path: 'following',
+          components: {
+            user: following
+          }
+        },
+        {
+          path: 'publish',
+          components: {
+            user: publish
+          }
+        }
+      ]
+    }, {
+      path: '/user/settings/',
+      components: {
+        header: loginHeader,
+        content: settings,
+        footer: Footer
+      },
+      children: [{
+          path: 'profile',
+          components: {
+            settings: profile
+          }
+        }, {
+          path: 'account',
+          components: {
+            settings: account
+          }
+        },
+        {
+          path: 'emails',
+          components: {
+            settings: emails
           }
         }
       ]

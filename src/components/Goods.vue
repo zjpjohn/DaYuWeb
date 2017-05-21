@@ -1,55 +1,50 @@
 <template>
   <div>
-    <!-- <v-subnav :subnavlist="subnavlist"></v-subnav>-->
     <div class="container">
-      <!--商品列表-->
-      <div class="row">
-        <div class="col-sm-9">
-          <p class="seacrch-end">为你找到 4,396 件物品</p>
-          <goods-list></goods-list>
-        </div>
-        <!--分类列表-->
-        <div class="col-sm-3 type-list">
-          <ul>
-            <li>
-              物品分类
-            </li>
-            <li>
-              <a href="#">
-                <span class="pull-right">1,396</span> 校园代步</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="pull-right">2,864</span>数码3C</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="pull-right">272</span>考研书籍</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="pull-right">632</span>生活日常</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="pull-right">11</span>虚拟物品</a>
-            </li>
-             <li>
-              <a href="#">
-                <span class="pull-right">310</span>其他</a>
-            </li>
-          </ul>
-        </div>
-        <!--分页-->
-        <div class="col-sm-12">
-          <v-pager></v-pager>
-        </div>
+  
+      <div class="col-sm-9">
+        <h3 class="search-result">为你找到 4,396 件物品</h3>
+        <!--商品列表组件-->
+        <goods-list></goods-list>
+        <!--分页组件-->
+        <v-pager></v-pager>
+      </div>
+      <!--分类列表-->
+      <div class="col-sm-3 filter">
+        <ul class="filter-list">
+          <li>
+            物品分类
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">1,396</span> 校园代步</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">2,864</span>数码3C</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">272</span>考研书籍</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">632</span>生活日常</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">11</span>虚拟物品</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">310</span>其他</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Subnav from '@/components/public/Subnav'
 import GoodsList from '@/components/public/goods-list'
 import Pager from '@/components/common/pager'
 export default {
@@ -59,7 +54,6 @@ export default {
       subnavlist: []
     }
   }, components: {
-    'v-subnav': Subnav,
     'goods-list': GoodsList,
     'v-pager': Pager
   }, created() {
@@ -81,31 +75,36 @@ export default {
 </script>
 
 <style scoped>
-.seacrch-end {
-  font-size: 18px;
+.search-result {
   line-height: 40px;
   font-weight: 600;
   color: #0366D6;
   border-bottom: 1px solid #E1E4E8
 }
 
-.type-list ul {
-  padding: 20px;
-  border: 1px solid #E1E4E8;
-  border-radius: 4px;
-  margin-top: 20px
+.filter {
+  margin-top: 60px;
 }
 
-.type-list li {
+.filter-list {
+  padding: 10px;
+  border: 1px solid #E1E4E8;
+  border-radius: 4px;
+
+  width: 74%;
+  margin: auto
+}
+
+.filter-list li {
   height: 30px;
 }
 
-.type-list li:first-child {
+.filter-list li:first-child {
   font-weight: 500;
   font-size: 16px
 }
 
-.type-list li a {
+.filter-list li a {
   color: #586069;
   font-weight: 400;
   line-height: 30px;
@@ -114,11 +113,12 @@ export default {
   border-radius: 2px;
 }
 
-.type-list li a:hover {
+.filter-list li a:hover {
   background: #EAECEF;
 }
 
-.type-list li a span {
+.filter-list li a span {
   font-weight: 500
 }
+
 </style>

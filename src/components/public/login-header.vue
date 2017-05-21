@@ -1,31 +1,31 @@
 <template>
-    <div class="container-fluid header-login-panel">
-        <div class="container header-login">
+    <div class="container-fluid header-nav-panel">
+        <div class="container">
             <ul>
-                <li class="pull-left">
+                <li class="pull-left header-nav-item">
                     <a href="#">大鱼互联</a>
                 </li>
-                <li class="pull-left">
+                <li class="pull-left header-nav-item">
                     <input type="text" class="header-login-search" placeholder="Search" />
                 </li>
-                <li class="pull-left">
+                <li class="pull-left header-nav-item">
                     <router-link :to="{path:'/goods/all'}">发布商品</router-link>
                 </li>
-                <li class="pull-left">
+                <li class="pull-left header-nav-item">
                     <router-link :to="{path:'/goods/all'}">发布求购</router-link>
                 </li>
-                <li class="pull-left">
+                <li class="pull-left header-nav-item">
                     <router-link :to="{path:'/answer'}">提问</router-link>
                 </li>
     
-                <li class="pull-right user-icon" title="查看个人资料" @click="showSubnav($event)">
+                <li class="pull-right user-icon header-nav-item" title="查看个人资料" @click="showSubnav($event)">
                     <a href="javascript:void(0)">
                         <img src="https://avatars3.githubusercontent.com/u/25541695?v=3&s=40" />
                     </a>
-                    <ul class="header-login-subnav" @mouseleave="hideSubnav($event)">
+                    <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
                         <li class="triangle-up"></li>
                         <li>您好，毕小山</li>
-                        <li class="header-login-subnav-divider"></li>
+                        <li class="dropdown-menu-divider"></li>
                         <li>
                             <a href="#">个人资料</a>
                         </li>
@@ -35,21 +35,21 @@
                         <li>
                             <a href="#">帮助</a>
                         </li>
-                        <li class="header-login-subnav-divider"></li>
+                        <li class="dropdown-menu-divider"></li>
                         <li>
-                            <a href="#">设置</a>
+                            <a href="/#/user/settings/profile">设置</a>
                         </li>
                         <li>
                             <a href="#">退出</a>
                         </li>
                     </ul>
                 </li>
-                <li class="pull-right" @click="showSubnav($event)">
+                <li class="pull-right header-nav-item" @click="showSubnav($event)">
                     <a href="javascript:void(0)">
                         <i class="icon-plus"></i>
                         <i class="icon-down-dir"></i>
                     </a>
-                    <ul class="header-login-subnav" @mouseleave="hideSubnav($event)">
+                    <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
                         <li class="triangle-up"></li>
                         <li>
                             <a href="#">发布商品</a>
@@ -94,34 +94,33 @@ export default {
 <style>
 /***登录后的导航条**/
 
-.header-login-panel {
-    height: 60px;
+.header-nav-panel {
+    height: 54px;
     border-bottom: 1px solid #E1E4E8;
     background: #24292E
 }
 
-.header-login>ul>li {
+.header-nav-item {
     padding: 0 12px;
-    line-height: 60px;
-    font-size: 16px;
+    line-height: 54px;
     position: relative
 }
 
-.header-login>ul>li a {
+.header-nav-item a {
     color: #C8C9CB;
     font-weight: 500;
 }
 
-.header-login>ul>li a i:last-child {
+.header-nav-item a i:last-child {
     margin-left: -12px;
 }
 
-.header-login>ul>li a:hover {
+.header-nav-item a:hover {
     color: #FFFFFF
 }
 
 .header-login-search {
-    height: 32px;
+    height: 30px;
     outline: none;
     text-indent: 10px;
     border: none;
@@ -141,9 +140,12 @@ export default {
 
 .user-icon img {
     width: 24px;
-    margin-top: 18px;
+    margin-top: 12px;
     border-radius: 2px;
 }
+
+
+
 
 
 /***二级导航**/
@@ -155,11 +157,11 @@ export default {
     border-right: 8px solid transparent;
     border-bottom: 8px solid #CECFCF;
     position: absolute;
-    top: -30px;
+    top: -38px;
     right: 10px
 }
 
-.header-login-subnav {
+.dropdown-menu {
     border: 1px solid #CECFCF;
     width: 180px;
     box-shadow: 0 0 6px #CECFCF;
@@ -172,25 +174,28 @@ export default {
     z-index: 1000
 }
 
-.header-login-subnav li {
+.dropdown-menu li {
     height: 30px;
     line-height: 30px;
-    text-indent: 10px;
-    font-size: 14px
+    text-indent: 10px
 }
 
-.header-login-subnav li a {
+.dropdown-menu li a {
     color: #586069!important;
     display: block
 }
 
-.header-login-subnav li a:hover {
+.dropdown-menu li a:hover {
     background: #0366D6;
     color: #FFFFFF!important
 }
+
+
+
+
 /***分割线**/
 
-.header-login-subnav-divider {
+.dropdown-menu-divider {
     border-top: 1px solid #E1E4E8;
     height: 0!important;
     margin: 6px 0

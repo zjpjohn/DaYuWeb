@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div>
-            <ul class="pager">
+        <div class="paginate-container">
+            <ul class="paginate">
                 <li>
-                    <a href="#" class="pager-disabled">Previous</a>
+                    <a href="#" class="paginate-disabled">Previous</a>
                 </li>
                 <li>
-                    <a href="#" class="pager-active">1</a>
+                    <a href="#" class="paginate-active">1</a>
                 </li>
                 <li>
                     <a href="#">2</a>
@@ -17,7 +17,7 @@
                 <li>
                     <a href="#">...</a>
                 </li>
-                 <li>
+                <li>
                     <a href="#">100</a>
                 </li>
                 <li>
@@ -35,43 +35,49 @@ export default {
 </script>
 
 <style>
-.pager-active {
+.paginate-active {
     background: #0366D6!important;
     color: #FFFFFF!important
 }
-.pager-disabled{
+
+.paginate-disabled {
     color: #D4D5D3!important;
     cursor: default!important;
     background: #FFFFFF!important
 }
-.pager {
-    margin: auto;
-    height: 50px;
-    width: 60%;
-    margin-top: 60px;
+
+.paginate-container {
+    clear: both;
+    padding-top: 60px;
 }
 
-.pager li {
+.paginate {
+    margin: auto;
+    height: 50px;
+    width: 60%
+}
+
+.paginate li {
     float: left;
 }
 
-.pager li a {
+.paginate li a {
     border: 1px solid #E1E4E8;
     padding: 10px 12px;
     display: block;
     color: #0366D6
 }
 
-.pager li a:hover {
+.paginate li a:hover {
     background: #E7E7E7
 }
 
-.pager li:first-child a {
+.paginate li:first-child a {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
 
-.pager li:last-child a {
+.paginate li:last-child a {
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
 }
