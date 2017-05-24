@@ -45,7 +45,7 @@
   </div>
 </template>
 <script>
-import GoodsList from '@/components/public/goods-list'
+import GoodsList from '@/components/goods/goods-list'
 import Pager from '@/components/common/pager'
 export default {
   data() {
