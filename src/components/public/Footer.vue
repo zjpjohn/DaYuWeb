@@ -18,8 +18,9 @@ export default {
 
 <style>
 .footer{
-    padding-top: 20px;
+    padding-top:20px;
     border-top: 1px solid #EAECEF;
-    clear: both
+    clear: both;
+    margin-top: 40px
 }
 </style>

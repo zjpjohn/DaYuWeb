@@ -24,7 +24,16 @@ export default {
                 'name': '密码设置'
             }, {
                 'path': 'emails',
-                'name': '邮箱'
+                'name': '邮箱设置'
+            },{
+                'path': 'connection',
+                'name': '联系方式' 
+            },{
+                'path': 'emails',
+                'name': '登录安全' 
+            },{
+                'path': 'emails',
+                'name': '消息通知' 
             }]
         }
     }, methods: {

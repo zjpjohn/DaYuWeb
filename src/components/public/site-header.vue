@@ -4,7 +4,11 @@
             <nav>
                 <ul>
                     <li class="pull-left">
-                        <a href="#">大鱼互联</a>
+                        <a href="#">
+                            <img 
+                            src="https://assets-cdn.github.com/images/modules/site/integrators/zenhubio.png" 
+                            style="height:40px;margin-top:10px"/>
+                        </a>
                     </li>
                     <li class="pull-left">
                         <router-link :to="{ path: '/' }">首页</router-link>

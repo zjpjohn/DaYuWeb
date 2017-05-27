@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class="container">
-  
+    <div class="container clear">
       <div class="col-sm-9">
         <h3 class="search-result">为你找到 4,396 件物品</h3>
         <!--商品列表组件-->

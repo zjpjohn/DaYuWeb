@@ -27,6 +27,7 @@ import settings from '@/components/settings/settings'
 import profile from '@/components/settings/profile'
 import account from '@/components/settings/account'
 import emails from '@/components/settings/emails'
+import connection from '@/components/settings/connection'
 Vue.use(Router)
 
 export default new Router({
@@ -127,6 +128,11 @@ export default new Router({
           path: 'emails',
           components: {
             settings: emails
+          }
+        },{
+          path:'connection',
+          components:{
+            settings:connection
           }
         }
       ]

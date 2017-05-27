@@ -3,7 +3,7 @@
         <div class="container">
             <ul>
                 <li class="pull-left header-nav-item">
-                    <a href="#">大鱼互联</a>
+                    <a href="/#/user/overview">大鱼互联</a>
                 </li>
                 <li class="pull-left header-nav-item">
                     <input type="text" class="header-login-search" placeholder="Search" />

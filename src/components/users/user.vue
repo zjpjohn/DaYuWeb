@@ -9,9 +9,9 @@
                 <span>DayuWeb</span>
                 <br/>
                 <br/>
-                <a href="#">添加个人简介</a>
+                <a href="/#/user/settings/profile">添加个人简介</a>
             </p>
-            <a href="#" class="btn btn-default edit-profile">修改资料</a>
+            <a href="/#/user/settings/profile" class="btn btn-default edit-profile">修改资料</a>
         </div>
         <div class="col-sm-9">
             <div class="user-topbar">
