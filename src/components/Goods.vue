@@ -12,7 +12,7 @@
       <div class="col-sm-3 filter">
         <ul class="filter-list">
           <li>
-            物品分类
+            <strong>物品分类</strong>
           </li>
           <li>
             <a href="#">
@@ -33,6 +33,18 @@
           <li>
             <a href="#">
               <span class="pull-right">11</span>虚拟物品</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">11</span>手机配件</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">11</span>的嘛西亚</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pull-right">11</span>超级二哈</a>
           </li>
           <li>
             <a href="#">
@@ -73,7 +85,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .search-result {
   line-height: 40px;
   font-weight: 600;
@@ -82,42 +94,30 @@ export default {
 }
 
 .filter {
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .filter-list {
   padding: 10px;
   border: 1px solid #E1E4E8;
   border-radius: 4px;
-
   width: 74%;
   margin: auto
 }
 
 .filter-list li {
-  height: 30px;
-}
-
-.filter-list li:first-child {
-  font-weight: 500;
-  font-size: 16px
+  height: 34px;
 }
 
 .filter-list li a {
   color: #586069;
-  font-weight: 400;
-  line-height: 30px;
+  line-height: 34px;
   display: block;
   padding: 0 8px;
-  border-radius: 2px;
+  border-radius: 2px
 }
 
 .filter-list li a:hover {
   background: #EAECEF;
 }
-
-.filter-list li a span {
-  font-weight: 500
-}
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container clear">
         <div class="col-sm-3 user-profile">
             <a href="#">
                 <img src="https://avatars0.githubusercontent.com/u/25541695?v=3&s=460" />
@@ -19,7 +19,7 @@
                     <router-link tag="li" :to="{path:'/user/overview'}" active-class="user-topbar-active">
                         <a>我的主页</a>
                     </router-link>
-                    <router-link tag="li" :to="{path:'/user/publish'}" active-class="user-topbar-active">
+                    <router-link tag="li" :to="{path:'/user/mypublish'}" active-class="user-topbar-active">
                         <a>我的发布</a>
                         <span class="badge">16</span>
                     </router-link>

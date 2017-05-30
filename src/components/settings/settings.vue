@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container clear">
         <div class="col-sm-3">
             <list-group :title="title" :listgroup="listgroup"></list-group>
         </div>
@@ -45,6 +45,7 @@ export default {
 </script>
 <style>
 .settings {
-    padding: 0 20px
+    padding: 0 20px;
+    min-height: 600px
 }
 </style>

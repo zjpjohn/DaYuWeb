@@ -12,15 +12,20 @@ import Login from '@/components/Login'
 import Goods from '@/components/Goods'
 import Answer from '@/components/Answer'
 
-
+import register from '@/components/register'
 /**个人中心组件***/
 import user from '@/components/users/user'
 import stars from '@/components/users/stars'
 import followers from '@/components/users/followers'
-import publish from '@/components/users/publish'
+import mypublish from '@/components/users/publish'
 import following from '@/components/users/following'
 import overview from '@/components/users/overview'
 
+/***个人业务操作***/
+import publish from '@/components/publish/publish'
+import publishgoods from '@/components/publish/publishgoods'
+import publishanswer from '@/components/publish/publishanswer'
+import publishbuy from '@/components/publish/publishbuy'
 
 /***设置**/
 import settings from '@/components/settings/settings'
@@ -39,6 +44,13 @@ export default new Router({
         content: Index,
         footer: Footer
       }
+    },{
+      path:'/register',
+      components:{
+        header:siteHeader,
+        content:register
+      }
+
     }, { /**商品页面**/
       path: '/goods/:type',
       name: 'goods',
@@ -69,7 +81,7 @@ export default new Router({
         content: Login
       }
     },
-    { /***用户中心****/
+    { /***用户中心、包含个人信息预览、收藏、关注。粉丝****/
       path: '/user',
       components: {
         header: loginHeader,
@@ -100,13 +112,38 @@ export default new Router({
           }
         },
         {
-          path: 'publish',
+          path: 'mypublish',
           components: {
-            user: publish
+            user: mypublish
           }
         }
       ]
-    }, {
+    }, 
+    {/****发布商品，提问页面****/
+      path: '/user/publish/',
+      components: {
+        header: loginHeader,
+        content: publish,
+        footer: Footer
+      },
+      children: [{
+        path: 'goods',
+        components: {
+          publishs: publishgoods
+        }
+      }, {
+        path: 'buy',
+        components: {
+          publishs: publishbuy
+        }
+      }, {
+        path: 'answer',
+        components: {
+          publishs: publishanswer
+        }
+      }]
+    },
+    { /****个人设置，个人资料设置，包含....******/
       path: '/user/settings/',
       components: {
         header: loginHeader,
@@ -129,10 +166,10 @@ export default new Router({
           components: {
             settings: emails
           }
-        },{
-          path:'connection',
-          components:{
-            settings:connection
+        }, {
+          path: 'connection',
+          components: {
+            settings: connection
           }
         }
       ]

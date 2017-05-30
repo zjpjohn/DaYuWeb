@@ -1,25 +1,31 @@
 <template>
     <div class="container-fluid header-nav-panel">
-        <div class="container">
+        <div class="container header-nav">
             <ul>
                 <li class="pull-left header-nav-item">
-                    <a href="/#/user/overview">大鱼互联</a>
+                    <a href="/#/">
+    
+                        <img src="../../assets/img/logo.png" style="height:36px;margin-top:10px" />
+                    </a>
                 </li>
                 <li class="pull-left header-nav-item">
-                    <input type="text" class="header-login-search" placeholder="Search" />
+                    <input type="text" class="header-login-search" placeholder="关键词" />
                 </li>
                 <li class="pull-left header-nav-item">
-                    <router-link :to="{path:'/goods/all'}">发布商品</router-link>
+                    <router-link :to="{path:'/user/publish/goods'}">
+                        发布商品</router-link>
                 </li>
                 <li class="pull-left header-nav-item">
-                    <router-link :to="{path:'/goods/all'}">发布求购</router-link>
+                    <router-link :to="{path:'/user/publish/buy'}">
+                        发布求购</router-link>
                 </li>
                 <li class="pull-left header-nav-item">
-                    <router-link :to="{path:'/answer'}">提问</router-link>
+                    <router-link :to="{path:'/user/publish/answer'}">
+                        提问</router-link>
                 </li>
     
-                <li class="pull-right user-icon header-nav-item" title="查看个人资料" @click="showSubnav($event)">
-                    <a href="javascript:void(0)">
+                <li class="pull-right user-icon header-nav-item" @click="showSubnav($event)">
+                    <a href="javascript:void(0)" class="hint--bottom" aria-label="毕小山 bxshichina@163.com">
                         <img src="https://avatars3.githubusercontent.com/u/25541695?v=3&s=40" />
                     </a>
                     <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
@@ -27,10 +33,12 @@
                         <li>您好，毕小山</li>
                         <li class="dropdown-menu-divider"></li>
                         <li>
-                            <a href="#">个人资料</a>
+                             <router-link :to="{path:'/user/overview/'}">
+                                个人资料</router-link>
                         </li>
                         <li>
-                            <a href="#">我的收藏</a>
+                             <router-link :to="{path:'/user/start/'}">
+                                我的收藏</router-link>
                         </li>
                         <li>
                             <a href="#">帮助</a>
@@ -45,20 +53,23 @@
                     </ul>
                 </li>
                 <li class="pull-right header-nav-item" @click="showSubnav($event)">
-                    <a href="javascript:void(0)">
+                    <a href="javascript:void(0)" class="hint--bottom" aria-label="新增">
                         <i class="icon-plus"></i>
                         <i class="icon-down-dir"></i>
                     </a>
                     <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
                         <li class="triangle-up"></li>
                         <li>
-                            <a href="#">发布商品</a>
+                            <router-link :to="{path:'/user/publish/goods'}">
+                                发布商品</router-link>
                         </li>
                         <li>
-                            <a href="#">发布求购</a>
+                            <router-link :to="{path:'/user/publish/buy'}">
+                                发布求购</router-link>
                         </li>
                         <li>
-                            <a href="#">提问</a>
+                            <router-link :to="{path:'/user/publish/answer'}">
+                                提问</router-link>
                         </li>
                     </ul>
                 </li>
@@ -96,8 +107,13 @@ export default {
 
 .header-nav-panel {
     height: 54px;
-    border-bottom: 1px solid #E1E4E8;
-    background: #24292E
+    background: #24292E;
+    width: 100%
+}
+
+.header-nav {
+    background: #24292E;
+    height: 54px;
 }
 
 .header-nav-item {
@@ -135,7 +151,7 @@ export default {
     background: #4B4F53;
     border: none;
     outline: none;
-    box-shadow: none
+    box-shadow: none;
 }
 
 .user-icon img {
@@ -189,7 +205,6 @@ export default {
     background: #0366D6;
     color: #FFFFFF!important
 }
-
 
 
 

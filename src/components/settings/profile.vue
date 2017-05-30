@@ -62,9 +62,9 @@ export default {
 </script>
 <style>
 .mt-2 {
-    width: 66.6%;
+    width: 66%;
     float: left;
-    padding-bottom: 20px
+    padding-bottom: 20px;
 }
 
 .mt-1 {
@@ -80,11 +80,7 @@ export default {
     color: #24292E
 }
 
-
-
-
 /***表单***/
-
 .form-contral-textarea {
     width: 440px;
     outline: none;
@@ -99,7 +95,7 @@ export default {
 
 .form-contral-textarea:focus {
     border: 1px solid #2188FF;
-    box-shadow: 0 0 6px #2188FF
+    box-shadow: inset 0 1px 2px rgba(27,31,35,0.075),0 0 0 0.2em rgba(3,102,214,0.3)
 }
 
 .form-contral-select {
@@ -114,6 +110,6 @@ export default {
 
 .form-contral-select:focus {
     border: 1px solid #2188FF;
-    box-shadow: 0 0 6px #2188FF;
+     box-shadow: inset 0 1px 2px rgba(27,31,35,0.075),0 0 0 0.2em rgba(3,102,214,0.3)
 }
 </style>

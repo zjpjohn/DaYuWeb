@@ -1,5 +1,8 @@
 <template>
-    <div class="container">
+    <div class="container-fluid login">
+        <p class="text-center">
+            <img src="../assets/img/logo-wite.png" style="height:100px;margin-top:40px;" />
+        </p>
         <h2 class="text-center">登录到大鱼互联</h2>
         <div class="errors" v-show="hasError">
             <span class="pull-right">
@@ -9,7 +12,7 @@
         <div class="auth-form-body">
             <form @submit.prevent="validateBeforeSubmit">
                 <div class="login-form-group">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label">用户名或Email</label>
                     <br/>
                     <input type="text" class="form-input" name="Email" v-model="email" placeholder="you@example.org" />
                 </div>
@@ -27,7 +30,7 @@
     
         <div class="create-account">
             <p class="text-center">没有账户？
-                <a href="#">马上注册</a>
+                <router-link :to="{ path: '/register' }">马上注册</router-link>
             </p>
         </div>
     
@@ -43,7 +46,6 @@
     </div>
 </template>
 <script>
-import { Validator } from 'vee-validate';
 export default {
     name: 'login',
     data() {
@@ -58,8 +60,8 @@ export default {
             if (this.email != '' && this.password != '') {
                 this.btnMsg = '登录中...';
                 alert(this.email + '&' + this.password)
-                setTimeout(()=>{
-                    location.href='/#/user/overview'
+                setTimeout(() => {
+                    location.href = '/#/user/overview'
                 }, 1000);
             }
         }, hideError: function () {
@@ -69,12 +71,12 @@ export default {
 }
 </script>
 <style>
-h2 {
-    margin-top: 100px
-}
-
-.text-center {
-    text-align: center
+.login{
+    background: #F9F9F9;
+    margin-top: -14px;
+    padding-bottom: 20px;
+    height: 714px;
+    max-height: 100%
 }
 
 .errors {
@@ -94,7 +96,8 @@ h2 {
     margin: auto;
     padding: 16px;
     width: 308px;
-    margin-top: 20px
+    margin-top: 20px;
+    background: #FFFFFF
 }
 
 .create-account {
@@ -123,7 +126,7 @@ h2 {
 
 .form-input:focus {
     border: 1px solid #2188FF;
-    box-shadow: 0 0 6px #2188FF
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075), 0 0 0 0.2em rgba(3, 102, 214, 0.3)
 }
 
 .form-button {
@@ -143,11 +146,13 @@ h2 {
 }
 
 .login-links {
-    margin-top: 60px;
+    margin-top: 40px;
+    color:#9B9B9B
 }
 
 .login-links a {
-    padding: 0 10px
+    padding: 0 6px;
+        color:#9B9B9B
 }
 </style>
 

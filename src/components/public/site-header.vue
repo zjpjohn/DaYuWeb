@@ -5,31 +5,39 @@
                 <ul>
                     <li class="pull-left">
                         <a href="#">
-                            <img 
-                            src="https://assets-cdn.github.com/images/modules/site/integrators/zenhubio.png" 
-                            style="height:40px;margin-top:10px"/>
+                            <img src="../../assets/img/logo-wite.png" style="height:40px;margin-top:14px" />
                         </a>
                     </li>
                     <li class="pull-left">
                         <router-link :to="{ path: '/' }">首页</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/goods/all'}">闲置</router-link>
+                        <router-link :to="{path:'/goods/all'}">闲置商品</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/goods/all'}">求购</router-link>
+                        <router-link :to="{path:'/goods/all'}">求购信息</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/answer'}">提问</router-link>
+                        <router-link :to="{path:'/answer'}">问题社区</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/user/overview'}">去后台</router-link>
+                        <router-link :to="{path:'/answer'}">校园新闻</router-link>
                     </li>
-                    <li class="pull-right">
-                        <a href="#">注册</a>
+                    <li class="pull-left">
+                        <router-link :to="{path:'/answer'}">同校活动</router-link>
                     </li>
-                    <li class="pull-right">
+                    <li class="pull-left">
+                        <router-link :to="{path:'/user/overview'}">毕小山</router-link>
+                    </li>
+                    <li class="pull-right login-li" v-if="login">
+                        <router-link :to="{path:'/user/overview'}" class="hint--bottom" aria-label="个人中心">
+                            <img src="https://avatars3.githubusercontent.com/u/25541695?v=3&s=40" />
+                        </router-link>
+                    </li>
+                    <li class="pull-right site-header-link" v-else>
                         <router-link :to="{path:'/login'}">登录</router-link>
+                        &nbsp;or&nbsp;
+                        <router-link :to="{path:'/register'}">注册</router-link>
                     </li>
                     <li class="pull-right">
                         <input type="text" class="header-search-input" />
@@ -42,7 +50,12 @@
 
 <script>
 export default {
-    name: 'header'
+    name: 'header',
+    data() {
+        return {
+            login: false
+        }
+    }
 }
 </script>
 
@@ -74,13 +87,27 @@ export default {
     border: 1px solid #D1D5DA;
     background: #FAFAFA;
     width: 200px;
-    border-radius: 4px
+    border-radius: 3px
 }
 
 .header-search-input:focus {
     background: #FFFFFF;
     border: 1px solid #2188FF;
-    box-shadow: 0 0 6px #2188FF
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075), 0 0 0 0.2em rgba(3, 102, 214, 0.3)
+}
+
+
+.login-li img {
+    margin-top: 20px;
+    height: 30px
+}
+
+.site-header-link a {
+    color: #0366D6!important
+}
+
+.site-header-link a:hover {
+    text-decoration: underline
 }
 </style>
 

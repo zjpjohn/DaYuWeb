@@ -37,4 +37,5 @@ export default {
 <style>
 @import './assets/css/base.css';
 @import './assets/css/fonts.css';
+@import './assets/css/hint.min.css'
 </style>
