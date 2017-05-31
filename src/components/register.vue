@@ -4,7 +4,7 @@
             <p class="register-title">加入 dayuweb.cn</p>
             <p>更好的方式来处理你的闲置，不仅仅是闲置...</p>
             <ol class="steps">
-                <li class="current">
+                <li v-bind:class="{current:step1}">
                     <span class="pull-left">
                         <i class="icon-user"></i>
                     </span>
@@ -13,26 +13,26 @@
                         <br/> 创建您的个人账户
                     </span>
                 </li>
-                <li>
+                <li v-bind:class="{current:step2}">
                     <span class="pull-left">
                         <i class="icon-stackexchange"></i>
                     </span>
                     <span class="pull-left">
                         <strong>Step 2</strong>
-                        <br/> 个人信息完善
+                        <br/> 邮箱激活
                     </span>
                 </li>
-                <li>
+                <li v-bind:class="{current:step3}">
                     <span class="pull-left">
                         <i class="icon-cog"></i>
                     </span>
                     <span class="pull-left">
                         <strong>Step 3</strong>
-                        <br/> 设置
+                        <br/> 完成
                     </span>
                 </li>
             </ol>
-            <div class="clear">
+            <div class="clear" v-show="step1">
                 <from>
                     <h3>创建个人账户</h3>
                     <div class="form-group">
@@ -76,6 +76,37 @@
                     </div>
                 </from>
             </div>
+    
+            <div class="clear" v-show="step2">
+                <h3>账户激活</h3>
+                <p class="note-info">
+                    <i class="icon-lightbulb"></i>
+                    账户激活码已经发送到你的邮箱
+                </p>
+                <div class="form-group">
+                    <label>
+                        <strong>激活码</strong>
+                    </label>
+                    <br/>
+                    <input type="text" class="form-contral-input" />
+                </div>
+    
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" @click="activateAccount">{{btnActiveMsg}}</button>
+                </div>
+            </div>
+    
+            <div class="clear" v-show="step3">
+                <h3>注册完成</h3>
+                <h2 class="text-center text-info">
+                    <i class="icon-emo-happy" style="font-size:120px"></i>
+                    <br/> 账户注册完成
+                </h2>
+    
+                <p class="text-center">
+                    <router-link :to="{path:'/login'}" class="btn btn-info">去登录吧！</router-link>
+                </p>
+            </div>
         </div>
     </div>
 </template>
@@ -83,14 +114,29 @@
 export default {
     data() {
         return {
-            btnMsg: '创建账号'
+            btnMsg: '创建账号',
+            btnActiveMsg: '账号激活',
+            step1: true,
+            step2: false,
+            step3: false
         }
     }, methods: {
         createAccount: function (event) {
             var that = event.currentTarget;
             this.btnMsg = '账号创建中...';
             that.disabled = true;
-            that.style.cursor = 'not-allowed'
+            that.style.cursor = 'not-allowed';
+            setTimeout(() => {
+                this.step1 = false;
+                this.step2 = true;
+            }, 2000);
+        }, activateAccount: function () {
+            this.btnActiveMsg = '账号激活中...'
+            setTimeout(() => {
+                this.step2 = false;
+                this.step3 = true;
+            }, 2000);
+
         }
     }
 }

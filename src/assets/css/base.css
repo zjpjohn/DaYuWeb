@@ -2,7 +2,7 @@
  * @Author: xiaoshan 
  * @Date: 2017-05-16 18:23:41 
  * @Last Modified by: xiaoshan
- * @Last Modified time: 2017-05-30 16:35:17
+ * @Last Modified time: 2017-05-31 09:58:14
  */
 
 html,
@@ -155,6 +155,12 @@ a {
 }
 .note-info{
    font-size: 14px;
+  color: #0366D6
+}
+
+
+/**文本信息提示**/
+.text-info{
   color: #0366D6
 }
 
