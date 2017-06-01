@@ -36,7 +36,7 @@
                     </li>
                     <li class="pull-right site-header-link" v-else>
                         <router-link :to="{path:'/login'}">登录</router-link>
-                        &nbsp;or&nbsp;
+                        &nbsp;或&nbsp;
                         <router-link :to="{path:'/register'}">注册</router-link>
                     </li>
                     <li class="pull-right">
