@@ -74,11 +74,8 @@ export default {
       this.msg = newval
     }
   }, mounted() {
-    //渲染之前之前获取数据给子组件
-    this.$http.get('../../static/subnav-data.json').then(function (response) {
-      this.subnavlist = response.body.subnavlist;
-    }, function (response) {
-      alert('Error')
+    this.axios.get('http://localhost:56335/api/goods/getallgoods',{params:{ 'pageIndex': 1, 'pageSize': 10 }}).then(function (res) {
+      console.log(res)
     })
   }, methods: {
   }

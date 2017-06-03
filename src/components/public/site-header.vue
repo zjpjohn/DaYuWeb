@@ -5,7 +5,7 @@
                 <ul>
                     <li class="pull-left">
                         <a href="#">
-                            <img src="../../assets/img/logo-wite.png" style="height:40px;margin-top:14px" />
+                            <img src="../../assets/img/logo.png" style="height:70px" />
                         </a>
                     </li>
                     <li class="pull-left">

@@ -21,7 +21,6 @@
                 </p>
             </div>
         </div>
-
           <div class="sm-4">
             <div class="goods-item">
                 <p class="text-center">

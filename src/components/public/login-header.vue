@@ -5,7 +5,7 @@
                 <li class="pull-left header-nav-item">
                     <a href="/#/">
     
-                        <img src="../../assets/img/logo.png" style="height:36px;margin-top:10px" />
+                        <img src="../../assets/img/logo-wite.png" style="height:54px;" />
                     </a>
                 </li>
                 <li class="pull-left header-nav-item">

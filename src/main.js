@@ -1,11 +1,24 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-import VueProgressBar from 'vue-progressbar'
-import VueResource from 'vue-resource'
-Vue.config.productionTip = false
+import Vue from 'vue';
+import App from './App';
+import router from './router';
+import VueProgressBar from 'vue-progressbar';
+import VueResource from 'vue-resource';
+
+import axios from 'axios';
+
+import VeeValidate, { Validator } from 'vee-validate';
+import zh_CN from 'vee-validate/dist/locale/zh_CN';
+Validator.addLocale(zh_CN);
+const config = {
+    errorBagName: 'errors', // change if property conflicts.
+    delay: 100,
+    locale: 'zh_CN',
+    messages: null,
+    strict: true
+};
+Vue.use(VeeValidate,config);
+
+Vue.config.productionTip = false;
 /**进度条配置信息**/
 const options = {
   color: '#0366D6',
@@ -14,9 +27,16 @@ const options = {
   autoRevert: true,
   location: 'top',
   inverse: false
-}
-Vue.use(VueResource) //使用路由
-Vue.use(VueProgressBar, options) //使用进度条插件
+};
+
+Vue.use(VueResource); //使用路由
+Vue.use(VueProgressBar, options); //使用进度条插件
+Vue.http.options.emulateJSON = true;
+Vue.http.options.emulateHTTP = true;
+
+Vue.prototype.axios = axios;
+axios.defaults.baseURL = 'http://localhost:56335';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 new Vue({
   el: '#app',
   router,

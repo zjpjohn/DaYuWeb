@@ -1,16 +1,16 @@
 <template>
     <div class="container-fluid login">
         <p class="text-center">
-            <img src="../assets/img/logo-wite.png" style="height:100px;margin-top:40px;" />
+            <img src="../assets/img/logo.blue.png"  style="height:100px" />
         </p>
         <h2 class="text-center">登录到大鱼互联</h2>
         <div class="errors" v-show="hasError">
             <span class="pull-right">
-                <i class=" icon-cancel" @click="hideError"></i>
+                <i class=" icon-cancel" @click="hideError" style="cursor:pointer"></i>
             </span>用户名或密码错误！
         </div>
         <div class="auth-form-body">
-            <form @submit.prevent="validateBeforeSubmit">
+            <form>
                 <div class="login-form-group">
                     <label for="email" class="form-label">用户名或Email</label>
                     <br/>
@@ -24,7 +24,7 @@
                     <br/>
                     <input type="password" class="form-input" name="Password" v-model="password" placeholder="*********" />
                 </div>
-                <button type="submit" class="form-button">{{btnMsg}}</button>
+                <button type="button" class="form-button" @click="login">{{btnMsg}}</button>
             </form>
         </div>
     
@@ -50,13 +50,13 @@ export default {
     name: 'login',
     data() {
         return {
-            hasError: true,
+            hasError: false,
             email: '',
             password: '',
             btnMsg: '登录'
         }
     }, methods: {
-        validateBeforeSubmit: function () {
+        login: function () {
             if (this.email != '' && this.password != '') {
                 this.btnMsg = '登录中...';
                 alert(this.email + '&' + this.password)

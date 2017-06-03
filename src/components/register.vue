@@ -33,14 +33,21 @@
                 </li>
             </ol>
             <div class="clear" v-show="step1">
-                <from>
+                <form>
                     <h3>创建个人账户</h3>
                     <div class="form-group">
-                        <label>
+                        <label v-bind:class="{'label-error': errors.has('name')}">
                             <strong>用户名</strong>
                         </label>
                         <br/>
-                        <input type="text" class="form-contral-input" placeholder="dayuweb" />
+                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('name') }" placeholder="dayuweb" name="name" v-validate="{rules:{required: true,alpha_dash:true,min:4,max:10}}" data-vv-as="用户名" v-model="model.name" @blur="hasName"/>
+                        <br/>
+                        <br/>
+                        <span v-show="errors.has('name')" class="form-contral-error">
+                            <i class="triangle-up-error">
+                            </i>
+                            {{ errors.first('name') }}
+                        </span>
                         <p class="note">
                             <i class="icon-emo-wink2"></i>
                             用户名是唯一的，由字母数字和下划线组成，这可以是你的名字或者组
@@ -48,22 +55,37 @@
                             <strong>可以用户登录本站</strong>，如果你不填写的话，将有系统生成！</p>
                     </div>
                     <div class="form-group">
-                        <label>
+                        <label v-bind:class="{'label-error': errors.has('email')}">
                             <strong>邮箱</strong>
                         </label>
                         <br/>
-                        <input type="text" class="form-contral-input" placeholder="you@example.com" />
+                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('email') }" placeholder="you@example.com" name="email" v-validate="{rules:{required: true, email: true}}" data-vv-as="邮箱" v-model="model.email" />
+                        <br/>
+                        <br/>
+                        <span v-show="errors.has('email')" class="form-contral-error">
+                            <i class="triangle-up-error">
+                            </i>
+                            {{ errors.first('email') }}
+                        </span>
                         <p class="note">邮箱将是你以后登录本站的账号，该邮箱将用于接受通知信息，或者密码找回</p>
                     </div>
                     <div class="form-group">
-                        <label>
+                        <label v-bind:class="{'label-error': errors.has('pwd')}">
                             <strong>密码</strong>
                         </label>
                         <br/>
-                        <input type="text" class="form-contral-input" placeholder="*********" />
+                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('email') }" placeholder="*********" name="pwd" v-validate="{rules:{required: true, alpha_dash:true,min:4,max:16}}" data-vv-as="密码" v-model="model.pwd"/>
+
+                        <br/>
+                        <br/>
+                         <span v-show="errors.has('pwd')" class="form-contral-error">
+                            <i class="triangle-up-error">
+                            </i>
+                            {{ errors.first('pwd') }}
+                        </span>
                         <p class="note">密码有数字、字母和下划线组成，不包含特殊字符，请妥善保管</p>
                     </div>
-    
+
                     <div class="form-group">
                         <p class="note tos-info">
                             <strong>
@@ -72,9 +94,9 @@
                             <a href="#">服务条款</a>和
                             <a href="#">隐私条款</a>
                         </p>
-                        <button type="submit" class="btn btn-success" @click="createAccount($event)">{{btnMsg}}</button>
+                        <button type="button" class="btn btn-success" @click="createAccount($event)">{{btnMsg}}</button>
                     </div>
-                </from>
+                </form>
             </div>
     
             <div class="clear" v-show="step2">
@@ -111,6 +133,8 @@
     </div>
 </template>
 <script>
+import { Validator } from 'vee-validate';
+import qs from 'qs'
 export default {
     data() {
         return {
@@ -118,26 +142,50 @@ export default {
             btnActiveMsg: '账号激活',
             step1: true,
             step2: false,
-            step3: false
+            step3: false,
+            model: {
+                name: '',
+                emial: '',
+                pwd: ''
+            }
         }
     }, methods: {
         createAccount: function (event) {
-            var that = event.currentTarget;
-            this.btnMsg = '账号创建中...';
-            that.disabled = true;
-            that.style.cursor = 'not-allowed';
-            setTimeout(() => {
-                this.step1 = false;
-                this.step2 = true;
-            }, 2000);
+            this.$validator.validateAll().then(() => {
+                alert(this.model.name+'&'+this.model.email+'&'+this.model.pwd);
+                 var that = event.currentTarget;
+                this.btnMsg = '账号创建中...';
+                that.disabled = true;
+                that.style.cursor = 'not-allowed';
+                setTimeout(() => {
+                    this.step1 = false;
+                    this.step2 = true;
+                    }, 2000);
+            }).catch(() => {
+                alert('请认真填写表单');
+            });
         }, activateAccount: function () {
             this.btnActiveMsg = '账号激活中...'
             setTimeout(() => {
                 this.step2 = false;
                 this.step3 = true;
             }, 2000);
-
+        },hasName(){
+           
+            if(this.fields.name.valid)
+            {
+                 alert(this.model.name);
+               /* this.$http.post('http://localhost:56335/api/user/hasname',{'name':this.model.name}).then(function(res){
+                    console.log(res.body.status)
+                })*/
+               this.axios.post('http://localhost:56335/api/user/hasname',
+                   {'name':this.model.name},{heads:{'Content-Type': 'application/json; charset=UTF-8'}}).then(function(res){
+                    console.log(res)
+                })
+            }
         }
+    }, components: {
+
     }
 }
 </script>
@@ -204,5 +252,40 @@ export default {
     border-bottom: 1px solid #EEEEEE;
     padding: 20px 0;
     width: 450px
+}
+
+
+/***错误信息提示***/
+
+.form-contral-error {
+    padding: 8px 10px;
+    background: #FFDCE0;
+    color: #86181D;
+    border-radius: 4px;
+    position: relative
+}
+
+.triangle-up-error {
+    width: 0px;
+    height: 0px;
+    line-height: 0px;
+    border-bottom: 8px solid #FFDCE0;
+    border-left: 8px solid #FFFFFF;
+    border-right: 8px solid #FFFFFF;
+    border-top: none;
+    position: absolute;
+    top: -8px;
+    left: 0;
+}
+
+
+/**错误提示label和input的样式****/
+
+.label-error {
+    color: #CB2431
+}
+
+.input-error {
+    background: #FAFFBD
 }
 </style>
