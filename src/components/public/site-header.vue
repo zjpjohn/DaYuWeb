@@ -26,9 +26,6 @@
                     <li class="pull-left">
                         <router-link :to="{path:'/answer'}">同校活动</router-link>
                     </li>
-                    <li class="pull-left">
-                        <router-link :to="{path:'/user/overview'}">毕小山</router-link>
-                    </li>
                     <li class="pull-right login-li" v-if="login">
                         <router-link :to="{path:'/user/overview'}" class="hint--bottom" aria-label="个人中心">
                             <img src="https://avatars3.githubusercontent.com/u/25541695?v=3&s=40" />

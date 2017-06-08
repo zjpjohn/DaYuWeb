@@ -1,43 +1,24 @@
 <template>
     <div>
-        <div class="sm-4">
+        <div class="sm-4" v-for="goods in goodses">
             <div class="goods-item">
                 <p class="text-center">
-                    <a href="#">
-                        <img src="https://images-cn.ssl-images-amazon.com/images/I/41wd6NnQ9QL._AC_SR300,300_.jpg" class="goods-item-img" />
+                    <a :href="[goods.Goods_Idstr]">
+                        <img :src="[goods.Goods_Imgstr]" class="goods-item-img" />
                     </a>
                 </p>
                 <p class="goods-item-title text-center">
-                    <a href="#">魅族 魅蓝note5</a>
+                    <a href="#">{{goods.Goods_Namestr}}</a>
                 </p>
                 <p class="text-center">
-                    <span class="label">9成新</span>
-                    <span class="label">南阳师范学院</span>
+                    <a href="#">{{goods.Goods_Descriptionstr}}</a>
+                </p>
+                <p class="text-center">
+                    <span class="label">{{goods.Goos_Quality}}</span>
                 </p>
                 <p class="goods-item-price text-center">
                     <a href="#">
-                        <strong>￥1290.00</strong>
-                    </a>
-                </p>
-            </div>
-        </div>
-          <div class="sm-4">
-            <div class="goods-item">
-                <p class="text-center">
-                    <a href="#">
-                        <img src="https://img12.360buyimg.com/mobilecms/s300x300_jfs/t3286/276/461326510/67641/7bb2686b/57b5316bNe7190151.jpg!q70.jpg" class="goods-item-img" />
-                    </a>
-                </p>
-                <p class="goods-item-title text-center">
-                    <a href="#">魅族 魅蓝note5</a>
-                </p>
-                <p class="text-center">
-                    <span class="label">9成新</span>
-                    <span class="label">南阳师范学院</span>
-                </p>
-                <p class="goods-item-price text-center">
-                    <a href="#">
-                        <strong>￥1290.00</strong>
+                        <strong>￥{{goods.Goods_Priceint}}</strong>
                     </a>
                 </p>
             </div>
@@ -46,7 +27,11 @@
 </template>
 <script>
 export default {
-
+    props: {
+        goodses: {
+            Type: Array
+        }
+    }
 }
 </script>
 <style>
@@ -85,6 +70,8 @@ export default {
 
 
 
+
+
 /**标签**/
 
 .label {
@@ -99,6 +86,7 @@ export default {
 .label:first-child {
     margin-left: 0
 }
+
 .label:hover {
     background: #DDEEFF
 }

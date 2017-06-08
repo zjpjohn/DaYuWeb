@@ -4,7 +4,7 @@
       <div class="col-sm-9">
         <h3 class="search-result">为你找到 4,396 件物品</h3>
         <!--商品列表组件-->
-        <goods-list></goods-list>
+        <goods-list v-bind:goodses="goodses"></goods-list>
         <!--分页组件-->
         <v-pager></v-pager>
       </div>
@@ -62,7 +62,8 @@ export default {
   data() {
     return {
       msg: '',
-      subnavlist: []
+      subnavlist: [],
+      goodses: []
     }
   }, components: {
     'goods-list': GoodsList,
@@ -74,8 +75,13 @@ export default {
       this.msg = newval
     }
   }, mounted() {
-    this.axios.get('http://localhost:56335/api/goods/getallgoods',{params:{ 'pageIndex': 1, 'pageSize': 10 }}).then(function (res) {
-      console.log(res)
+    var that = this;
+    this.axios.get('goods', { params: { page: 1, per_page: 10 } }).then(function (res) {   
+      if (res.data.status == "200") {    
+        that.goodses = res.data.Goods;
+      } else {
+        alert("没找到");
+      }
     })
   }, methods: {
   }

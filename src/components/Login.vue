@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid login">
         <p class="text-center">
-            <img src="../assets/img/logo.blue.png"  style="height:100px" />
+            <img src="../assets/img/logo.blue.png" style="height:100px" />
         </p>
         <h2 class="text-center">登录到大鱼互联</h2>
         <div class="errors" v-show="hasError">
@@ -46,6 +46,7 @@
     </div>
 </template>
 <script>
+import qs from 'qs';
 export default {
     name: 'login',
     data() {
@@ -59,10 +60,24 @@ export default {
         login: function () {
             if (this.email != '' && this.password != '') {
                 this.btnMsg = '登录中...';
-                alert(this.email + '&' + this.password)
-                setTimeout(() => {
-                    location.href = '/#/user/overview'
-                }, 1000);
+                // alert(this.email + '&' + this.password)
+                this.axios.post('/users/OAuth',
+                    qs.stringify({
+                        User_Emailstr: this.email,
+                        User_Pwdstr: this.password
+                    })
+                ).then(function (res) {
+                    if (res.data.status == '200') {
+                        var token = res.data.token;
+                        var storage = window.localStorage;
+                        storage['token'] = token;
+                        window.location.href='/#/user/overview'
+                    } else {
+                        this.hasError = false
+                    }
+                }).catch(function (error) {
+                    alert(error);
+                })
             }
         }, hideError: function () {
             this.hasError = false
@@ -71,7 +86,7 @@ export default {
 }
 </script>
 <style>
-.login{
+.login {
     background: #F9F9F9;
     margin-top: -14px;
     padding-bottom: 20px;
@@ -147,12 +162,12 @@ export default {
 
 .login-links {
     margin-top: 40px;
-    color:#9B9B9B
+    color: #9B9B9B
 }
 
 .login-links a {
     padding: 0 6px;
-        color:#9B9B9B
+    color: #9B9B9B
 }
 </style>
 

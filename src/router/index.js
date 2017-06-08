@@ -70,7 +70,6 @@ export default new Router({
     { /**关于页面**/
       path: '/about',
       components: {
-        header: siteHeader,
         content: About,
         footer: Footer
       }
@@ -84,7 +83,6 @@ export default new Router({
     { /***用户中心、包含个人信息预览、收藏、关注。粉丝****/
       path: '/user',
       components: {
-        header: loginHeader,
         content: user,
         footer: Footer
       },
@@ -122,7 +120,6 @@ export default new Router({
     {/****发布商品，提问页面****/
       path: '/user/publish/',
       components: {
-        header: loginHeader,
         content: publish,
         footer: Footer
       },
@@ -146,7 +143,6 @@ export default new Router({
     { /****个人设置，个人资料设置，包含....******/
       path: '/user/settings/',
       components: {
-        header: loginHeader,
         content: settings,
         footer: Footer
       },

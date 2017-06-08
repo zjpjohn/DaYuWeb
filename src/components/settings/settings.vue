@@ -1,17 +1,23 @@
 <template>
-    <div class="container clear">
-        <div class="col-sm-3">
-            <list-group :title="title" :listgroup="listgroup"></list-group>
+    <div>
+        <div class="container-fluid">
+            <login-header :user="user"></login-header>
         </div>
-        <div class="col-sm-9">
-            <div class="settings">
-                <router-view name="settings"></router-view>
+        <div class="container clear">
+            <div class="col-sm-3">
+                <list-group :title="title" :listgroup="listgroup"></list-group>
+            </div>
+            <div class="col-sm-9">
+                <div class="settings">
+                    <router-view name="settings"></router-view>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
 import listGroup from '../common/list-group'
+import LoginHeader from '../public/login-header'
 export default {
     data() {
         return {
@@ -25,21 +31,39 @@ export default {
             }, {
                 'path': 'emails',
                 'name': '邮箱设置'
-            },{
+            }, {
                 'path': 'connection',
-                'name': '联系方式' 
-            },{
+                'name': '联系方式'
+            }, {
                 'path': 'emails',
-                'name': '登录安全' 
-            },{
+                'name': '登录安全'
+            }, {
                 'path': 'emails',
-                'name': '消息通知' 
-            }]
+                'name': '消息通知'
+            }],
+            user: []
         }
     }, methods: {
 
     }, components: {
-        'list-group': listGroup
+        'list-group': listGroup,
+        LoginHeader
+    }, mounted() {
+        var that = this;
+        var storage = window.localStorage;
+        var token = storage['token'];
+        this.axios.get('users', {
+            params: {
+                access_token: token
+            }
+        }).then(function (res) {
+            if (res.data.status == "200") {
+                console.log(res.data.user);
+                that.user = res.data.user
+            } else {
+                window.location.href = '/#/login'
+            }
+        })
     }
 }
 </script>

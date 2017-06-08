@@ -25,20 +25,20 @@
                 </li>
     
                 <li class="pull-right user-icon header-nav-item" @click="showSubnav($event)">
-                    <a href="javascript:void(0)" class="hint--bottom" aria-label="毕小山 bxshichina@163.com">
-                        <img src="https://avatars3.githubusercontent.com/u/25541695?v=3&s=40" />
+                    <a href="javascript:void(0)" class="hint--bottom" :aria-label="[user.User_Realnamestr+' '+user.User_Emailstr]">
+                        <img :src="[user.User_Iconstr]" />
                     </a>
                     <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
                         <li class="triangle-up"></li>
-                        <li>您好，毕小山</li>
+                        <li>您好，{{user.User_Namestr}}</li>
                         <li class="dropdown-menu-divider"></li>
                         <li>
-                             <router-link :to="{path:'/user/overview/'}">
-                                个人资料</router-link>
+                            <router-link :to="{path:'/user/overview/'}">
+                                个人主页</router-link>
                         </li>
                         <li>
-                             <router-link :to="{path:'/user/start/'}">
-                                我的收藏</router-link>
+                            <router-link :to="{path:'/user/settings/profile'}">
+                                个人资料</router-link>
                         </li>
                         <li>
                             <a href="#">帮助</a>
@@ -48,7 +48,7 @@
                             <a href="/#/user/settings/profile">设置</a>
                         </li>
                         <li>
-                            <a href="#">退出</a>
+                            <a href="javascript:void(0)" @click="signOut">退出</a>
                         </li>
                     </ul>
                 </li>
@@ -81,6 +81,11 @@
 <script>
 export default {
     name: 'header',
+    props: {
+        user: {
+            Type: Object
+        }
+    },
     data() {
         return {
 
@@ -97,6 +102,10 @@ export default {
         }, hideSubnav: function (event) {
             var el = event.currentTarget;
             el.style.display = 'none'
+        }, signOut() {
+            var storage = window.localStorage;
+            storage.removeItem('token');
+            window.location.href = '/#/'
         }
     }
 }
@@ -164,6 +173,8 @@ export default {
 
 
 
+
+
 /***二级导航**/
 
 .triangle-up {
@@ -205,6 +216,8 @@ export default {
     background: #0366D6;
     color: #FFFFFF!important
 }
+
+
 
 
 

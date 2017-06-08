@@ -2,8 +2,6 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import VueProgressBar from 'vue-progressbar';
-import VueResource from 'vue-resource';
-
 import axios from 'axios';
 
 import VeeValidate, { Validator } from 'vee-validate';
@@ -29,13 +27,9 @@ const options = {
   inverse: false
 };
 
-Vue.use(VueResource); //使用路由
 Vue.use(VueProgressBar, options); //使用进度条插件
-Vue.http.options.emulateJSON = true;
-Vue.http.options.emulateHTTP = true;
-
 Vue.prototype.axios = axios;
-axios.defaults.baseURL = 'http://localhost:56335';
+axios.defaults.baseURL = 'https://www.dayuweb.cn/api/';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 new Vue({
   el: '#app',

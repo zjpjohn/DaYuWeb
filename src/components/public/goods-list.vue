@@ -41,6 +41,7 @@
                 ￥1,299.00
             </p>
         </div>
+        
         <div class="goods-list-item">
             <a href="#">
                 <img src="https://images-cn.ssl-images-amazon.com/images/I/41wd6NnQ9QL._AC_SR300,300_.jpg" class="goods-img pull-left" />
