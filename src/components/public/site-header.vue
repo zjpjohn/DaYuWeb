@@ -12,7 +12,7 @@
                         <router-link :to="{ path: '/' }">首页</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/goods/all'}">闲置商品</router-link>
+                        <router-link :to="{path:'/goods'}">闲置商品</router-link>
                     </li>
                     <li class="pull-left">
                         <router-link :to="{path:'/goods/all'}">求购信息</router-link>
@@ -28,7 +28,8 @@
                     </li>
                     <li class="pull-right login-li" v-if="login">
                         <router-link :to="{path:'/user/overview'}" class="hint--bottom" aria-label="个人中心">
-                            <img src="https://avatars3.githubusercontent.com/u/25541695?v=3&s=40" />
+                            <img :src="[user.User_Iconstr]" class="pull-left" />
+                            <span>个人中心</span>
                         </router-link>
                     </li>
                     <li class="pull-right site-header-link" v-else>
@@ -47,10 +48,31 @@
 
 <script>
 export default {
-    name: 'header',
+    name: 'site-header',
     data() {
         return {
-            login: false
+            login: false,
+            user: []
+        }
+    }, mounted() {
+        var that = this;
+        var storage = window.localStorage;
+        var token = storage['token'];
+        if (token == null || token == '') {
+            that.login = false;
+        } else {
+            this.axios.get('users', {
+                params: {
+                    access_token: token
+                }
+            }).then(function (res) {
+                if (res.data.status == "200") {
+                    that.login = true;
+                    that.user = res.data.user
+                } else {
+                    window.location.href = '/#/login'
+                }
+            })
         }
     }
 }
@@ -93,10 +115,18 @@ export default {
     box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075), 0 0 0 0.2em rgba(3, 102, 214, 0.3)
 }
 
+.login-li a {
+    color: #0366D6!important
+}
+
+.login-li a:hover {
+    text-decoration: underline
+}
 
 .login-li img {
     margin-top: 20px;
-    height: 30px
+    height: 24px;
+    border-radius: 2px
 }
 
 .site-header-link a {

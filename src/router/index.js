@@ -12,6 +12,7 @@ import Login from '@/components/Login'
 import Goods from '@/components/Goods'
 import Answer from '@/components/Answer'
 
+import goodsdetail from '@/components/goods/goods-details'
 import register from '@/components/register'
 /**个人中心组件***/
 import user from '@/components/users/user'
@@ -44,19 +45,26 @@ export default new Router({
         content: Index,
         footer: Footer
       }
-    },{
-      path:'/register',
-      components:{
-        header:siteHeader,
-        content:register
+    }, {
+      path: '/register',
+      components: {
+        header: siteHeader,
+        content: register
       }
 
-    }, { /**商品页面**/
-      path: '/goods/:type',
+    }, { /**所有商品页面**/
+      path: '/goods',
       name: 'goods',
       components: {
         header: siteHeader,
         content: Goods,
+        footer: Footer
+      }
+    }, {
+      path: '/goods/:id',
+      components: {
+        header: siteHeader,
+        content: goodsdetail,
         footer: Footer
       }
     }, { /**问答页面**/
@@ -116,8 +124,8 @@ export default new Router({
           }
         }
       ]
-    }, 
-    {/****发布商品，提问页面****/
+    },
+    { /****发布商品，提问页面****/
       path: '/user/publish/',
       components: {
         content: publish,

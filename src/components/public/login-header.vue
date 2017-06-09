@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid header-nav-panel">
+    <div class="container-fluid header-nav-panel" v-title="user.User_Namestr">
         <div class="container header-nav">
             <ul>
                 <li class="pull-left header-nav-item">
@@ -25,8 +25,9 @@
                 </li>
     
                 <li class="pull-right user-icon header-nav-item" @click="showSubnav($event)">
-                    <a href="javascript:void(0)" class="hint--bottom" :aria-label="[user.User_Realnamestr+' '+user.User_Emailstr]">
-                        <img :src="[user.User_Iconstr]" />
+                    <a href="javascript:void(0)" class="hint--bottom" aria-label="查看个人信息">
+                        <img :src="[user.User_Iconstr]" class="pull-left" />
+                        <i class="icon-down-dir"></i>
                     </a>
                     <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
                         <li class="triangle-up"></li>
@@ -34,7 +35,7 @@
                         <li class="dropdown-menu-divider"></li>
                         <li>
                             <router-link :to="{path:'/user/overview/'}">
-                                个人主页</router-link>
+                                我的主页</router-link>
                         </li>
                         <li>
                             <router-link :to="{path:'/user/settings/profile'}">
@@ -164,14 +165,14 @@ export default {
 }
 
 .user-icon img {
-    width: 24px;
-    margin-top: 12px;
+    width: 20px;
+    margin-top: 16px;
     border-radius: 2px;
 }
 
-
-
-
+.user-icon i {
+    padding-left: 10px;
+}
 
 
 
@@ -216,8 +217,6 @@ export default {
     background: #0366D6;
     color: #FFFFFF!important
 }
-
-
 
 
 

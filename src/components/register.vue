@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid register">
+    <div class="container-fluid register" v-title="'用户注册'">
         <div class="ms-6">
             <p class="register-title">加入 dayuweb.cn</p>
             <p>更好的方式来处理你的闲置，不仅仅是闲置...</p>
@@ -40,7 +40,7 @@
                             <strong>用户名</strong>
                         </label>
                         <br/>
-                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('name') }" placeholder="dayuweb" name="name" v-validate="{rules:{required: true,alpha_dash:true,min:4,max:10}}" data-vv-as="用户名" v-model="model.name" @blur="hasName"/>
+                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('name') }" placeholder="dayuweb" name="name" v-validate="{rules:{required: true,alpha_dash:true,min:4,max:10}}" data-vv-as="用户名" v-model="model.name" @blur="checkName" />
                         <br/>
                         <br/>
                         <span v-show="errors.has('name')" class="form-contral-error">
@@ -51,15 +51,15 @@
                         <p class="note">
                             <i class="icon-emo-wink2"></i>
                             用户名是唯一的，由字母数字和下划线组成，这可以是你的名字或者组
-                            <br/>织名的 拼音，
-                            <strong>可以用户登录本站</strong>，如果你不填写的话，将有系统生成！</p>
+                            <br/>织名的拼音，
+                            <strong>可以用户登录本站</strong></p>
                     </div>
                     <div class="form-group">
                         <label v-bind:class="{'label-error': errors.has('email')}">
                             <strong>邮箱</strong>
                         </label>
                         <br/>
-                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('email') }" placeholder="you@example.com" name="email" v-validate="{rules:{required: true, email: true}}" data-vv-as="邮箱" v-model="model.email" />
+                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('email') }" placeholder="you@example.com" name="email" v-validate="{rules:{required: true, email: true}}" data-vv-as="邮箱" v-model="model.email" @blur="checkEmail" />
                         <br/>
                         <br/>
                         <span v-show="errors.has('email')" class="form-contral-error">
@@ -67,25 +67,26 @@
                             </i>
                             {{ errors.first('email') }}
                         </span>
-                        <p class="note">邮箱将是你以后登录本站的账号，该邮箱将用于接受通知信息，或者密码找回</p>
+                        <p class="note">邮箱将是你以后登录本站的账号，该邮箱将用于接受通知信息，例如密码找回，<br/>邮箱被已存在？<a href="#">邮箱找回</a>                        
+                        </p>
                     </div>
                     <div class="form-group">
                         <label v-bind:class="{'label-error': errors.has('pwd')}">
                             <strong>密码</strong>
                         </label>
                         <br/>
-                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('email') }" placeholder="*********" name="pwd" v-validate="{rules:{required: true, alpha_dash:true,min:4,max:16}}" data-vv-as="密码" v-model="model.pwd"/>
-
+                        <input type="text" v-bind:class="{'form-contral-input':true,'input-error': errors.has('email') }" placeholder="*********" name="pwd" v-validate="{rules:{required: true, alpha_dash:true,min:4,max:16}}" data-vv-as="密码" v-model="model.pwd" />
+    
                         <br/>
                         <br/>
-                         <span v-show="errors.has('pwd')" class="form-contral-error">
+                        <span v-show="errors.has('pwd')" class="form-contral-error">
                             <i class="triangle-up-error">
                             </i>
                             {{ errors.first('pwd') }}
                         </span>
                         <p class="note">密码有数字、字母和下划线组成，不包含特殊字符，请妥善保管</p>
                     </div>
-
+    
                     <div class="form-group">
                         <p class="note tos-info">
                             <strong>
@@ -145,24 +146,25 @@ export default {
             step3: false,
             model: {
                 name: '',
-                emial: '',
+                email: '',
                 pwd: ''
             }
         }
     }, methods: {
         createAccount: function (event) {
             this.$validator.validateAll().then(() => {
-                alert(this.model.name+'&'+this.model.email+'&'+this.model.pwd);
-                 var that = event.currentTarget;
+                alert(this.model.name + '&' + this.model.email + '&' + this.model.pwd);
+                var that = event.currentTarget;
                 this.btnMsg = '账号创建中...';
+                
                 that.disabled = true;
                 that.style.cursor = 'not-allowed';
+
                 setTimeout(() => {
                     this.step1 = false;
                     this.step2 = true;
-                    }, 2000);
+                }, 2000);
             }).catch(() => {
-                alert('请认真填写表单');
             });
         }, activateAccount: function () {
             this.btnActiveMsg = '账号激活中...'
@@ -170,18 +172,25 @@ export default {
                 this.step2 = false;
                 this.step3 = true;
             }, 2000);
-        },hasName(){
-           
-            if(this.fields.name.valid)
-            {
-                 alert(this.model.name);
-               /* this.$http.post('http://localhost:56335/api/user/hasname',{'name':this.model.name}).then(function(res){
-                    console.log(res.body.status)
-                })*/
-               this.axios.post('http://localhost:56335/api/user/hasname',
-                   {'name':this.model.name},{heads:{'Content-Type': 'application/json; charset=UTF-8'}}).then(function(res){
-                    console.log(res)
-                })
+        }, checkName() {
+            var that = this;
+            if (this.fields.name.valid) {
+                this.axios.get('users/name',
+                    { params: { 'user_name': this.model.name } }).then(function (res) {
+                        if (res.data.status == "200") {
+                            that.errors.add('name', '用户名已经存在');
+                        } 
+                    })
+            }
+        },checkEmail(){
+            var that = this;
+            if (this.fields.email.valid) {
+                this.axios.get('users/email',
+                    { params: { 'email': this.model.email } }).then(function (res) {
+                        if (res.data.status == "200") {
+                             that.errors.add('email', "邮箱已经存在");
+                        } 
+                    })
             }
         }
     }, components: {
@@ -255,6 +264,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /***错误信息提示***/
 
 .form-contral-error {
@@ -277,6 +292,12 @@ export default {
     top: -8px;
     left: 0;
 }
+
+
+
+
+
+
 
 
 /**错误提示label和input的样式****/

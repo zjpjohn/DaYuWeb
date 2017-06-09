@@ -1,5 +1,5 @@
 <template>
-  <div class="container content">
+  <div class="container content" v-title="'大鱼互联，一个更好的方式来处理你的闲置'">
     <h2 class="text-center">一个更好的方式来处理你的闲置，不仅仅是闲置</h2>
     <p class="text-center">比尔吉沃特，德玛西亚，我是青铜王者，我为自己代言！！</p>
     <p class="text-center" style="margin-top:120px">

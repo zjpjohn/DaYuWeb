@@ -13,7 +13,7 @@
                     <span>{{user.User_Namestr}}</span>
                     <br/>
                     <br/>
-                    <a href="/#/user/settings/profile" v-if="user.User_Biostr!=''||user.User_Biostr!=null">{{user.User_Biostr}}</a>
+                    <a href="/#/user/settings/profile" v-if="user.User_Biostr!=null && user.User_Biostr!=''">{{user.User_Biostr}}</a>
                     <a href="/#/user/settings/profile" v-else>添加个人简介</a>
                 </p>
                 <a href="/#/user/settings/profile" class="btn btn-default edit-profile">修改资料</a>
@@ -70,7 +70,6 @@ export default {
             }
         }).then(function (res) {
             if (res.data.status == "200") {
-                console.log(res.data.user);
                 that.user = res.data.user
             } else {
                 window.location.href = '/#/login'
@@ -95,12 +94,6 @@ export default {
 
 
 
-
-
-
-
-
-
 /**个人简介**/
 
 .user-bio span {
@@ -120,6 +113,8 @@ export default {
     width: 80%;
     display: block
 }
+
+
 
 
 

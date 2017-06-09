@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-title="'大鱼互联-账户信息'">
         <p class="subheader-heading">密码设置</p>
         <div class="form-group">
             <label>旧密码</label>

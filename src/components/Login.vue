@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid login">
+    <div class="container-fluid login" v-title="'登录大鱼互联'">
         <p class="text-center">
             <img src="../assets/img/logo.blue.png" style="height:100px" />
         </p>
@@ -7,7 +7,7 @@
         <div class="errors" v-show="hasError">
             <span class="pull-right">
                 <i class=" icon-cancel" @click="hideError" style="cursor:pointer"></i>
-            </span>用户名或密码错误！
+            </span>{{errorMsg}}
         </div>
         <div class="auth-form-body">
             <form>
@@ -24,7 +24,7 @@
                     <br/>
                     <input type="password" class="form-input" name="Password" v-model="password" placeholder="*********" />
                 </div>
-                <button type="button" class="form-button" @click="login">{{btnMsg}}</button>
+                <button type="button" class="form-button" @click="login($event)">{{btnMsg}}</button>
             </form>
         </div>
     
@@ -54,14 +54,20 @@ export default {
             hasError: false,
             email: '',
             password: '',
-            btnMsg: '登录'
+            btnMsg: '登录',
+            errorMsg: ''
         }
     }, methods: {
-        login: function () {
+        login: function (event) {
+            var that = this;
+            var el = event.currentTarget;
             if (this.email != '' && this.password != '') {
                 this.btnMsg = '登录中...';
-                // alert(this.email + '&' + this.password)
-                this.axios.post('/users/OAuth',
+
+                el.disabled = true;
+                el.style.cursor = 'not-allowed';
+
+                this.axios.post('users/OAuth',
                     qs.stringify({
                         User_Emailstr: this.email,
                         User_Pwdstr: this.password
@@ -71,12 +77,20 @@ export default {
                         var token = res.data.token;
                         var storage = window.localStorage;
                         storage['token'] = token;
-                        window.location.href='/#/user/overview'
+                        window.location.href = '/#/user/overview'
                     } else {
-                        this.hasError = false
+                        that.errorMsg = '用户名或密码错误';
+                        that.hasError = true;
+                        that.btnMsg = '登录';
+                        el.disabled = false;
+                        el.style.cursor = 'pointer';
                     }
                 }).catch(function (error) {
-                    alert(error);
+                    that.errorMsg = '服务器故障，请稍后重试！';
+                    that.hasError = true;
+                    that.btnMsg = '登录';
+                    el.disabled = false;
+                    el.style.cursor = 'pointer';
                 })
             }
         }, hideError: function () {

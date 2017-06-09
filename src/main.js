@@ -29,8 +29,14 @@ const options = {
 
 Vue.use(VueProgressBar, options); //使用进度条插件
 Vue.prototype.axios = axios;
-axios.defaults.baseURL = 'https://www.dayuweb.cn/api/';
+axios.defaults.baseURL = 'http://localhost:56335/api/';//http://localhost:56335/api/
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+Vue.directive('title', {
+  inserted: function (el, binding) {
+    document.title = binding.value
+  }
+})
 new Vue({
   el: '#app',
   router,

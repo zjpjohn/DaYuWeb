@@ -1,5 +1,5 @@
 <template>
-  <div class="publishgoods clear">
+  <div class="publishgoods clear" v-title="'大鱼互联-发布商品'">
     <div class="container">
       <div class="ms-8">
         <ol class="steps">
@@ -34,7 +34,7 @@
   
         <!--第一步-->
         <div class="clear" v-show="step1">
-          <from>
+          <form>
             <h3>商品基本信息</h3>
             <p class="note-info">
               <strong>
@@ -96,7 +96,7 @@
             <div class="form-group form-group-btn">
               <button type="button" class="btn btn-default pull-right" @click="step1Tpstep2">下一步</button>
             </div>
-          </from>
+          </form>
         </div>
   
         <!--第二步-->

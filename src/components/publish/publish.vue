@@ -25,7 +25,6 @@ export default {
             }
         }).then(function (res) {
             if (res.data.status == "200") {
-                console.log(res.data.user);
                 that.user = res.data.user
             } else {
                 window.location.href = '/#/login'

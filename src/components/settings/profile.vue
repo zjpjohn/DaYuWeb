@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-title="'大鱼互联-个人信息'">
         <p class="subheader-heading">个人信息</p>
         <div class="mt-2">
             <div class="form-group">
