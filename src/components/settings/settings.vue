@@ -18,6 +18,7 @@
 <script>
 import listGroup from '../common/list-group'
 import LoginHeader from '../public/login-header'
+
 export default {
     data() {
         return {
@@ -49,21 +50,17 @@ export default {
         'list-group': listGroup,
         LoginHeader
     }, mounted() {
-        var that = this;
-        var storage = window.localStorage;
-        var token = storage['token'];
-        this.axios.get('users', {
-            params: {
-                access_token: token
-            }
-        }).then(function (res) {
-            if (res.data.status == "200") {
-                console.log(res.data.user);
-                that.user = res.data.user
-            } else {
-                window.location.href = '/#/login'
-            }
-        })
+        if (this.$store.state.token) {
+            this.axios.get('users', {
+                params: {
+                    access_token: this.$store.state.token
+                }
+            }).then((res) => {
+                if (res.data.status == "200") {
+                    this.user = res.data.user
+                }
+            })
+        }
     }
 }
 </script>

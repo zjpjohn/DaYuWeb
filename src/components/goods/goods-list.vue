@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="sm-4" v-for="goods in goodses">
+        <div class="col-sm-3" v-for="goods in goodses">
             <div class="goods-item">
                 <p class="text-center">
-                    <a :href="['/#/goods/'+goods.Goods_Idstr]">
+                    <a :href="['/goods/'+goods.Goods_Idstr]">
                         <img :src="[goods.Goods_Imgstr]" class="goods-item-img" />
                     </a>
                 </p>
@@ -34,9 +34,9 @@ export default {
     }
 }
 </script>
-<style>
-.sm-4 {
-    width: 33.3%;
+<style scoped>
+.col-sm-3 {
+    width: 25%;
     float: left;
 }
 

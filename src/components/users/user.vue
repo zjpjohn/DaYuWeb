@@ -16,27 +16,39 @@
                     <a href="/#/user/settings/profile" v-if="user.User_Biostr!=null && user.User_Biostr!=''">{{user.User_Biostr}}</a>
                     <a href="/#/user/settings/profile" v-else>添加个人简介</a>
                 </p>
+                <ul class="user-adress">
+                    <li v-if="user.User_Adress!=null && user.User_Adress!=''">
+                        <i class="icon-location"></i>&nbsp;{{user.User_Adress}}
+                    </li>
+                    <li v-if="user.User_Emailstr!=null && user.User_Emailstr!=''">
+                        <i class="icon-mail-alt"></i>
+                        <a href="#">&nbsp;{{user.User_Emailstr}}</a>
+                    </li>
+                    <li v-if="user.User_Phonestr!=null && user.User_Phonestr!=''">
+                        <i class="icon-link"></i>&nbsp;{{user.User_Phonestr}}
+                    </li>
+                </ul>
                 <a href="/#/user/settings/profile" class="btn btn-default edit-profile">修改资料</a>
             </div>
             <div class="col-sm-9">
                 <div class="user-topbar">
                     <ul>
-                        <router-link tag="li" :to="{path:'/user/overview'}" active-class="user-topbar-active">
+                        <router-link tag="li" :to="{path:'/'+this.name+'/overview'}" active-class="user-topbar-active">
                             <a>我的主页</a>
                         </router-link>
-                        <router-link tag="li" :to="{path:'/user/mypublish'}" active-class="user-topbar-active">
+                        <router-link tag="li" :to="{path:'/'+this.name+'/mypublish'}" active-class="user-topbar-active">
                             <a>我的发布</a>
                             <span class="badge">16</span>
                         </router-link>
-                        <router-link tag="li" :to="{path:'/user/start'}" active-class="user-topbar-active">
+                        <router-link tag="li" :to="{path:'/'+this.name+'/start'}" active-class="user-topbar-active">
                             <a>我的收藏</a>
                             <span class="badge">12</span>
                         </router-link>
-                        <router-link tag="li" :to="{path:'/user/following'}" active-class="user-topbar-active">
+                        <router-link tag="li" :to="{path:'/'+this.name+'/following'}" active-class="user-topbar-active">
                             <a>我关注的</a>
                             <span class="badge">6</span>
                         </router-link>
-                        <router-link tag="li" :to="{path:'/user/followers'}" active-class="user-topbar-active">
+                        <router-link tag="li" :to="{path:'/'+this.name+'/followers'}" active-class="user-topbar-active">
                             <a>关注我的</a>
                             <span class="badge">0</span>
                         </router-link>
@@ -51,30 +63,40 @@
 
 <script>
 import LoginHeader from '../public/login-header'
-
+import * as types from '@/store/types.js'
 export default {
     data() {
         return {
-            user: []
+            user: [],
+            name:''
         }
-    }, mounted() {
-        var that = this;
-        var storage = window.localStorage;
-        var token = storage['token'];
-        if (token == null || token == '') {
-            window.location.href = '/#/login'
+    }, created() {
+        this.$Progress.start();
+        this.name=localStorage.name
+    },watch(){
+        
+    },
+    mounted() {
+        if (this.$store.state.token == null || this.$store.state.token == '') {
+            window.location.href = '/login'
+        } else {
+            this.axios.get('users', {
+                params: {
+                    access_token: this.$store.state.token
+                }
+            }).then((res) => {
+                this.$Progress.finish()
+                if (res.data.status == "200") {
+                    this.$store.commit(types.USER, res.data.user);
+                    this.user = this.$store.state.user;
+                } else {
+                    window.location.href = '/login'
+                }
+            }).catch((error) => {
+                this.$Progress.fail()
+            })
         }
-        this.axios.get('users', {
-            params: {
-                access_token: token
-            }
-        }).then(function (res) {
-            if (res.data.status == "200") {
-                that.user = res.data.user
-            } else {
-                window.location.href = '/#/login'
-            }
-        })
+
     }, components: {
         LoginHeader
     }
@@ -91,6 +113,8 @@ export default {
 .user-bio {
     padding-top: 20px
 }
+
+
 
 
 
@@ -114,12 +138,19 @@ export default {
     display: block
 }
 
+.user-adress {
+    border-top: 1px solid #EAECEF;
+    width: 80%;
+    padding-top: 20px
+}
 
+.user-adress li {
+    line-height: 30px;
+}
 
-
-
-
-
+.user-adress li a:hover {
+    text-decoration: underline
+}
 
 
 

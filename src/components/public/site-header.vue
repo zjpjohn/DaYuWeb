@@ -15,19 +15,19 @@
                         <router-link :to="{path:'/goods'}">闲置商品</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/goods/all'}">求购信息</router-link>
+                        <router-link :to="{path:'/goods'}">求购信息</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/answer'}">问题社区</router-link>
+                        <router-link :to="{path:'/'}">问题社区</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/answer'}">校园新闻</router-link>
+                        <router-link :to="{path:'/'}">校园新闻</router-link>
                     </li>
                     <li class="pull-left">
-                        <router-link :to="{path:'/answer'}">同校活动</router-link>
+                        <router-link :to="{path:'/'}">同校活动</router-link>
                     </li>
                     <li class="pull-right login-li" v-if="login">
-                        <router-link :to="{path:'/user/overview'}" class="hint--bottom" aria-label="个人中心">
+                        <router-link :to="{path:'/'+user.User_Namestr+'/overview'}" class="hint--right" aria-label="个人中心">
                             <img :src="[user.User_Iconstr]" class="pull-left" />
                             <span>个人中心</span>
                         </router-link>
@@ -52,28 +52,25 @@ export default {
     data() {
         return {
             login: false,
-            user: []
+            user: [],
         }
-    }, mounted() {
-        var that = this;
-        var storage = window.localStorage;
-        var token = storage['token'];
-        if (token == null || token == '') {
-            that.login = false;
-        } else {
+    }, created() {
+        if (this.$store.state.token) {
+            this.login = true;
             this.axios.get('users', {
                 params: {
-                    access_token: token
+                    access_token: this.$store.state.token
                 }
-            }).then(function (res) {
+            }).then((res) => {
                 if (res.data.status == "200") {
-                    that.login = true;
-                    that.user = res.data.user
-                } else {
-                    window.location.href = '/#/login'
+                    this.user = res.data.user
                 }
             })
+        } else {
+            this.login = false
         }
+    }, mounted() {
+
     }
 }
 </script>

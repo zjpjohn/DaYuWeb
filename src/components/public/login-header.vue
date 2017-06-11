@@ -1,9 +1,9 @@
 <template>
-    <div class="container-fluid header-nav-panel" v-title="user.User_Namestr">
+    <div class="container-fluid header-nav-panel">
         <div class="container header-nav">
             <ul>
                 <li class="pull-left header-nav-item">
-                    <a href="/#/">
+                    <a href="/">
     
                         <img src="../../assets/img/logo-wite.png" style="height:54px;" />
                     </a>
@@ -12,15 +12,15 @@
                     <input type="text" class="header-login-search" placeholder="关键词" />
                 </li>
                 <li class="pull-left header-nav-item">
-                    <router-link :to="{path:'/user/publish/goods'}">
+                    <router-link :to="{path:'/'+this.name+'/publish/goods'}">
                         发布商品</router-link>
                 </li>
                 <li class="pull-left header-nav-item">
-                    <router-link :to="{path:'/user/publish/buy'}">
+                    <router-link :to="{path:'/'+this.name+'/publish/buy'}">
                         发布求购</router-link>
                 </li>
                 <li class="pull-left header-nav-item">
-                    <router-link :to="{path:'/user/publish/answer'}">
+                    <router-link :to="{path:'/'+this.name+'/publish/answer'}">
                         提问</router-link>
                 </li>
     
@@ -34,11 +34,11 @@
                         <li>您好，{{user.User_Namestr}}</li>
                         <li class="dropdown-menu-divider"></li>
                         <li>
-                            <router-link :to="{path:'/user/overview/'}">
+                            <router-link :to="{path:'/'+this.name+'/overview/'}">
                                 我的主页</router-link>
                         </li>
                         <li>
-                            <router-link :to="{path:'/user/settings/profile'}">
+                            <router-link :to="{path:'/'+this.name+'/settings/profile'}">
                                 个人资料</router-link>
                         </li>
                         <li>
@@ -46,7 +46,8 @@
                         </li>
                         <li class="dropdown-menu-divider"></li>
                         <li>
-                            <a href="/#/user/settings/profile">设置</a>
+                            <router-link :to="{path:'/'+this.name+'/settings/profile'}">
+                                设置</router-link>
                         </li>
                         <li>
                             <a href="javascript:void(0)" @click="signOut">退出</a>
@@ -61,15 +62,15 @@
                     <ul class="dropdown-menu" @mouseleave="hideSubnav($event)">
                         <li class="triangle-up"></li>
                         <li>
-                            <router-link :to="{path:'/user/publish/goods'}">
+                            <router-link :to="{path:'/'+this.name+'/publish/goods'}">
                                 发布商品</router-link>
                         </li>
                         <li>
-                            <router-link :to="{path:'/user/publish/buy'}">
+                            <router-link :to="{path:'/'+this.name+'/publish/buy'}">
                                 发布求购</router-link>
                         </li>
                         <li>
-                            <router-link :to="{path:'/user/publish/answer'}">
+                            <router-link :to="{path:'/'+this.name+'/publish/answer'}">
                                 提问</router-link>
                         </li>
                     </ul>
@@ -80,6 +81,7 @@
 </template>
 
 <script>
+import * as types from '@/store/types.js'
 export default {
     name: 'header',
     props: {
@@ -89,10 +91,13 @@ export default {
     },
     data() {
         return {
-
+            name: ''
         }
-    }, methods: {
-        /***显示隐藏**/
+    }, created() {
+        this.name = localStorage.name
+    }, mounted() {
+    },
+    methods: {
         showSubnav: function (event) {
             var el = event.currentTarget;
             if (document.defaultView.getComputedStyle(el.children[1], false)['display'] == 'block') {
@@ -104,9 +109,10 @@ export default {
             var el = event.currentTarget;
             el.style.display = 'none'
         }, signOut() {
-            var storage = window.localStorage;
-            storage.removeItem('token');
-            window.location.href = '/#/'
+            localStorage.removeItem('token');
+            localStorage.removeItem('name');
+            this.$store.commit(types.LOGOUT, null);
+            window.location.href = '/'
         }
     }
 }

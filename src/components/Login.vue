@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid login" v-title="'登录大鱼互联'">
+    <div class="container-fluid login" v-title="'登录到大鱼互联'">
         <p class="text-center">
             <img src="../assets/img/logo.blue.png" style="height:100px" />
         </p>
@@ -46,7 +46,8 @@
     </div>
 </template>
 <script>
-import qs from 'qs';
+import * as types from '@/store/types.js'
+import qs from 'qs'
 export default {
     name: 'login',
     data() {
@@ -55,11 +56,12 @@ export default {
             email: '',
             password: '',
             btnMsg: '登录',
-            errorMsg: ''
+            errorMsg: '',
+            url: '',
+            token: ''
         }
     }, methods: {
-        login: function (event) {
-            var that = this;
+        login(event) {
             var el = event.currentTarget;
             if (this.email != '' && this.password != '') {
                 this.btnMsg = '登录中...';
@@ -72,12 +74,14 @@ export default {
                         User_Emailstr: this.email,
                         User_Pwdstr: this.password
                     })
-                ).then(function (res) {
+                ).then((res) => {
                     if (res.data.status == '200') {
                         var token = res.data.token;
-                        var storage = window.localStorage;
-                        storage['token'] = token;
-                        window.location.href = '/#/user/overview'
+                        var name = res.data.name;
+                        localStorage.setItem('token', token);
+                        localStorage.setItem('name', name);
+                        this.$store.commit(types.LOGIN, token);
+                        window.location.href = '/' + name + '/overview'
                     } else {
                         that.errorMsg = '用户名或密码错误';
                         that.hasError = true;
@@ -85,16 +89,23 @@ export default {
                         el.disabled = false;
                         el.style.cursor = 'pointer';
                     }
-                }).catch(function (error) {
-                    that.errorMsg = '服务器故障，请稍后重试！';
-                    that.hasError = true;
-                    that.btnMsg = '登录';
+                }).catch((error) => {
+                    this.errorMsg = '服务器故障，请稍后重试！';
+                    this.hasError = true;
+                    this.btnMsg = '登录';
                     el.disabled = false;
                     el.style.cursor = 'pointer';
                 })
             }
-        }, hideError: function () {
+        }, hideError() {
             this.hasError = false
+        }
+    }, mounted() {
+        var url = this.$route.query.url;
+        alert(url)
+        if (url != undefined) {
+            this.url = '/' + url;
+            alert(this.url)
         }
     }
 }
