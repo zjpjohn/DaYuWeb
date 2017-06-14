@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label>地址</label>
                 <br/>
-                <input type="text" class="form-contral-input" :value="user.User_Adress" />
+                <input type="text" class="form-contral-input" :value="user.User_Adress" placeholder="西区，南阳师范学院，南阳，中国" />
             </div>
             <div class="form-group">
                 <label>爱好</label>

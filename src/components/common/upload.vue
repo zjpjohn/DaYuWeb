@@ -33,15 +33,6 @@ export default {
         }
     }, methods: {
         upload: function (e) {
-            Array.prototype.has = function (val) {
-                var has = false;
-                for (var i = 0; i < this.length; i++) {
-                    if (this[i] == val) {
-                        has = true;
-                    }
-                }
-                return has;
-            };
             var el = e.currentTarget;
             if (this.imgs.length + 1 > 5) {
                 this.show = false;
@@ -49,9 +40,11 @@ export default {
             } else {
                 var file = el.files[0];
                 var url = window.URL.createObjectURL(file);
+                alert(this.imgs.has(url))
                 if (!this.imgs.has(url)) {
                     this.imgs.push(url);
                 }
+                console.log(this.imgs)
             }
         }, showDelete: function (e) {
             var el = e.currentTarget;
@@ -67,22 +60,12 @@ export default {
             }
         }, hideModal: function () {/**传递给子组件的事件**/
             this.modalShow = false
-        }, ok: function (url) {
-            Array.prototype.indexOf = function (val) {
-                for (var i = 0; i < this.length; i++) {
-                    if (this[i] == val) return i;
-                }
-                return -1;
-            };
-            Array.prototype.remove = function (val) {
-                var index = this.indexOf(val);
-                if (index > -1) {
-                    this.splice(index, 1);
-                }
-            };
+        }, ok: function () {
             this.imgs.remove(this.url);
+            window.URL.revokeObjectURL(this.url);
             this.url = '';
-            this.modalShow = false
+            this.modalShow = false;
+            console.log(this.imgs)
         }, cancel: function () {
             this.modalShow = false
         }

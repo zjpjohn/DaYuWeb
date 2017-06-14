@@ -27,7 +27,7 @@
             </span>
             <span class="pull-left">
               <strong>Step 3</strong>
-              <br/> 商品信息确认
+              <br/> 商品发布完成
             </span>
           </li>
         </ol>
@@ -46,7 +46,20 @@
                 <strong>商品名称*</strong>
               </label>
               <br/>
-              <input type="text" class="form-contral-input" />
+              <input type="text" 
+                  class="form-contral-input" 
+                  v-bind:class="{'form-contral-input':true,'input-error': errors.has('goodsName') }" 
+                  placeholder="变形金刚5" 
+                  name="goodsName" 
+                  v-validate="{rules:{required: true,max:20}}" 
+                  data-vv-as="商品名称" />
+              <br/> 
+              <br/>
+              <span v-show="errors.has('goodsName')" class="form-contral-error">
+                  <i class="triangle-up-error"></i>
+                  {{ errors.first('goodsName') }}
+              </span>
+
             </div>
   
             <div class="form-group">
@@ -54,15 +67,35 @@
                 <strong>商品描述*</strong>
               </label>
               <br/>
-              <textarea class="form-contral-textarea" rows="3" placeholder="曾经有一个..."></textarea>
+              <textarea class="form-contral-textarea" 
+                  rows="3" 
+                  v-bind:class="{'form-contral-input':true,'input-error': errors.has('goodsDescription') }" 
+                  placeholder="商品描述" 
+                  name="goodsDescription" 
+                  v-validate="{rules:{required: true,max:100}}" 
+                  data-vv-as="商品描述">
+              </textarea>
+              <br/> 
+              <br/>
+              <span v-show="errors.has('goodsDescription')" class="form-contral-error">
+                    <i class="triangle-up-error"></i>
+                  {{ errors.first('goodsDescription') }}
+              </span>
+
             </div>
   
             <div class="form-group">
-              <label>
-                <strong>商品成色*</strong>
-              </label>
-              <br/>
-              <input type="text" class="form-contral-input" />
+                <label>
+                  <strong>商品成色*</strong>
+                </label>
+                <br/>
+                <select class="form-contral-select">
+                  <option>全新</option>
+                  <option>9成新</option>
+                  <option>8成新</option>
+                  <option>5成新</option>
+                  <option>Old</option>
+                </select>
             </div>
   
             <div class="form-group">
@@ -82,20 +115,21 @@
                 <strong>商品价格*</strong>
               </label>
               <br/>
-              <input type="text" class="form-contral-input" />
-            </div>
-  
-            <div class="form-group">
-              <label>
-                <strong>商品原价</strong>
-              </label>
+              <input type="text" class="form-contral-input"  
+                  v-bind:class="{'form-contral-input':true,'input-error': errors.has('goodsPrice') }" 
+                  placeholder="商品描述" 
+                  name="goodsPrice" 
+                  v-validate="{rules:{required: true,max:100}}" 
+                  data-vv-as="商品价格" />
+              <br/> 
               <br/>
-              <input type="text" class="form-contral-input" />
+              <span v-show="errors.has('goodsPrice')" class="form-contral-error">
+                    <i class="triangle-up-error"></i>
+                  {{ errors.first('goodsPrice') }}
+              </span>
             </div>
   
-            <div class="form-group form-group-btn">
-              <button type="button" class="btn btn-default pull-right" @click="step1Tpstep2">下一步</button>
-            </div>
+              <button type="button" class="btn btn-success" @click="step1Tpstep2">下一步</button>
           </form>
         </div>
   
@@ -114,25 +148,21 @@
             </upload>
           </div>
   
-          <div class="form-group clear form-group-btn">
-            <button type="button" class="btn btn-default pull-right" @click="gotoStep3">下一步</button>
-            <button type="button" class="btn btn-default" @click="gotoStep1">上一步</button>
+          <div class="form-group clear" style="padding-top:20px">
+            <button type="button" class="btn btn-success" @click="gotoStep3">下一步</button>
           </div>
         </div>
         <!--第三步-->
         <div class="clear" v-show="step3">
-          <h3>商品信息确认</h3>
+          <h3>商品发布完成</h3>
           <h2 class="text-center text-info">
             <i class="icon-emo-happy" style="font-size:120px"></i>
-            <br/> 账户注册完成
+            <br/> 商品发布完成
           </h2>
   
           <p class="text-center">
-            <router-link :to="{path:'/login'}" class="btn btn-info">去登录吧！</router-link>
+            <router-link :to="{path:'/login'}" class="btn btn-info">去看看吧！</router-link>
           </p>
-          <div class="form-group form-group-btn">
-            <button type="button" class="btn btn-default pull-left" @click="step3Tostep2">上一步</button>
-          </div>
         </div>
       </div>
     </div>
@@ -147,21 +177,20 @@ export default {
       btnActiveMsg: '账号激活',
       step1: true,
       step2: false,
-      step3: false
+      step3: false,
+      goods:{
+        goodsName:'',
+        goodsDescription:'',
+        goodsPrice:''
+      }
     }
   }, methods: {
     step1Tpstep2: function () {
       this.step1 = false;
       this.step2 = true
-    }, gotoStep1: function () {
-      this.step1 = true;
-      this.step2 = false
     }, gotoStep3: function () {
       this.step2 = false;
       this.step3 = true
-    }, step3Tostep2: function () {
-      this.step3 = false;
-      this.step2 = true
     }
   }, components: {
     'upload': ImgUpload

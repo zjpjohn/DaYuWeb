@@ -14,7 +14,7 @@
                     <br/>
                     <br/>
                     <a href="/#/user/settings/profile" v-if="user.User_Biostr!=null && user.User_Biostr!=''">{{user.User_Biostr}}</a>
-                    <a href="/#/user/settings/profile" v-else>添加个人简介</a>
+                    <a :href="['/'+name+'/settings/profile']" v-else>添加个人简介</a>
                 </p>
                 <ul class="user-adress">
                     <li v-if="user.User_Adress!=null && user.User_Adress!=''">
@@ -28,7 +28,7 @@
                         <i class="icon-link"></i>&nbsp;{{user.User_Phonestr}}
                     </li>
                 </ul>
-                <a href="/#/user/settings/profile" class="btn btn-default edit-profile">修改资料</a>
+                <a :href="['/'+name+'/settings/profile']" class="btn btn-default edit-profile" v-show="user.User_Phonestr==null || user.User_Emailstr==null">修改资料</a>
             </div>
             <div class="col-sm-9">
                 <div class="user-topbar">
