@@ -102,7 +102,6 @@ export default {
         }
     }, mounted() {
         var url = this.$route.query.url;
-        alert(url)
         if (url != undefined) {
             this.url = '/' + url;
             alert(this.url)

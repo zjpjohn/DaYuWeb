@@ -8,7 +8,9 @@ import store from './store/store.js'
 import title from './directive/title.js'
 Vue.config.productionTip = false;
 
+import fetch from 'whatwg-fetch'
 
+Vue.prototype.fetch=fetch
 //在这里扩展一些对数组的操作
 
 Array.prototype.has=function (val) {

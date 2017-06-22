@@ -12,8 +12,7 @@ export default {
         return {
             user:[]
         }
-    }, mounted() {
-        
+    }, mounted() {     
        if (this.$store.state.token) {
             this.axios.get('users', {
                 params: {
